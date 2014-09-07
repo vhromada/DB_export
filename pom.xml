@@ -7,6 +7,7 @@
 	<groupId>cz.vhromada.export</groupId>
 	<artifactId>db-export-parent</artifactId>
 	<version>1.0.0</version>
+	<packaging>pom</packaging>
 
 	<name>DB Export</name>
 	<description>Java application for exporting data from DB</description>
@@ -39,6 +40,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.source.version>7</project.source.version>
 	</properties>
+
+	<modules>
+		<module>DB Export API</module>
+	</modules>
 
 	<profiles>
 		<profile>
