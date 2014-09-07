@@ -1,4 +1,7 @@
-DB_export
-=========
+#Java application for exporting data from database
 
-Application for exporting data from DB
+Supported databases:
+
+* Derby
+* HSQLDB
+* H2
