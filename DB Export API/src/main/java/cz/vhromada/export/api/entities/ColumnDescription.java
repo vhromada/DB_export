@@ -13,6 +13,21 @@ public class ColumnDescription {
 	/** Type */
 	private ColumnType type;
 
+	/** Creates a new instance of ColumnDescription. */
+	public ColumnDescription() {
+	}
+
+	/**
+	 * Creates a new instance of ColumnDescription.
+	 *
+	 * @param name name
+	 * @param type type
+	 */
+	public ColumnDescription(final String name, final ColumnType type) {
+		this.name = name;
+		this.type = type;
+	}
+
 	/**
 	 * Returns name.
 	 *

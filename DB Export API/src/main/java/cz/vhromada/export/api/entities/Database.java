@@ -15,6 +15,21 @@ public class Database {
 	/** Type */
 	private Type type;
 
+	/** Creates a new instance of Database. */
+	public Database() {
+	}
+
+	/**
+	 * Creates a new instance of Database.
+	 *
+	 * @param dataSource data source
+	 * @param type       type
+	 */
+	public Database(final DataSource dataSource, final Type type) {
+		this.dataSource = dataSource;
+		this.type = type;
+	}
+
 	/**
 	 * Returns data source.
 	 *

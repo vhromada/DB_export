@@ -12,6 +12,19 @@ public class RowItem {
 	/** List of column items */
 	private List<ColumnItem> columnItems;
 
+	/** Creates a new instance of RowItem. */
+	public RowItem() {
+	}
+
+	/**
+	 * Creates a new instance of RowItem.
+	 *
+	 * @param columnItems list of column items
+	 */
+	public RowItem(final List<ColumnItem> columnItems) {
+		this.columnItems = columnItems;
+	}
+
 	/**
 	 * Returns list of column items.
 	 *

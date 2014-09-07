@@ -13,6 +13,21 @@ public class ColumnItem {
 	/** Value stored in column */
 	private Object value;
 
+	/** Creates a new instance of ColumnItem. */
+	public ColumnItem() {
+	}
+
+	/**
+	 * Creates a new instance of ColumnItem.
+	 *
+	 * @param columnDescription column description
+	 * @param value             value stored in column
+	 */
+	public ColumnItem(final ColumnDescription columnDescription, final Object value) {
+		this.columnDescription = columnDescription;
+		this.value = value;
+	}
+
 	/**
 	 * Returns column description.
 	 *
