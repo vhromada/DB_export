@@ -15,7 +15,6 @@ import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.entities.RowItem;
 import cz.vhromada.export.api.exceptions.ExportException;
 import cz.vhromada.validators.Validators;
-import cz.vhromada.validators.exceptions.ValidationException;
 import nu.xom.Attribute;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -44,7 +43,8 @@ public class XmlExporter extends AbstractExport {
 	 * @param fileName  name of XML file which will be created
 	 * @throws IllegalArgumentException if directory is null
 	 *                                  or name of file is null
-	 * @throws ValidationException      if name of file is empty string
+	 * @throws cz.vhromada.validators.exceptions.ValidationException
+	 *                                  if name of file is empty string
 	 */
 	public XmlExporter(final Path directory, final String fileName) {
 		Validators.validateArgumentNotNull(directory, "Directory");

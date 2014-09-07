@@ -1,17 +1,5 @@
 package cz.vhromada.export.commons;
 
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_BUTTON_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_DATA_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_GAP_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_LABEL_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_LENGTH;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_LONG_COMPONENT_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.HORIZONTAL_SHORT_GAP_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.VERTICAL_BUTTON_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.VERTICAL_COMBO_BOX_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.VERTICAL_COMPONENT_SIZE;
-import static cz.vhromada.export.commons.SwingConstants.VERTICAL_GAP_SIZE;
-
 import java.util.Map;
 
 import javax.swing.*;
@@ -25,6 +13,12 @@ import cz.vhromada.validators.Validators;
  * @author Vladimir Hromada
  */
 public final class SwingUtils {
+
+	/** Name of field components */
+	private static final String FIELD_COMPONENTS = "Components";
+
+	/** Name of field buttons */
+	private static final String FIELD_BUTTONS = "Buttons";
 
 	/** Creates a new instance of SwingUtils. */
 	private SwingUtils() {
@@ -72,20 +66,21 @@ public final class SwingUtils {
 			final JButton... buttons) {
 		Validators.validateArgumentNotNull(layout, "Layout");
 		Validators.validateArgumentNotNull(comboBox, "Combo box");
-		Validators.validateArgumentNotNull(components, "Components");
-		Validators.validateArgumentNotNull(buttons, "Buttons");
-		Validators.validateMapNotContainNull(components, "Components");
-		Validators.validateArrayNotContainNull(buttons, "Buttons");
+		Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
+		Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
+		Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
+		Validators.validateArrayNotContainNull(buttons, FIELD_BUTTONS);
 
 		final GroupLayout.Group componentsGroup = layout.createParallelGroup()
-				.addComponent(comboBox, HORIZONTAL_LONG_COMPONENT_SIZE, HORIZONTAL_LONG_COMPONENT_SIZE, HORIZONTAL_LONG_COMPONENT_SIZE)
+				.addComponent(comboBox, SwingConstants.HORIZONTAL_LONG_COMPONENT_SIZE, SwingConstants.HORIZONTAL_LONG_COMPONENT_SIZE,
+						SwingConstants.HORIZONTAL_LONG_COMPONENT_SIZE)
 				.addGroup(createHorizontalComponentsLayout(layout, components))
 				.addGroup(createHorizontalButtonsLayout(layout, buttons));
 
 		return layout.createSequentialGroup()
-				.addGap(HORIZONTAL_GAP_SIZE)
+				.addGap(SwingConstants.HORIZONTAL_GAP_SIZE)
 				.addGroup(componentsGroup)
-				.addGap(HORIZONTAL_GAP_SIZE);
+				.addGap(SwingConstants.HORIZONTAL_GAP_SIZE);
 	}
 
 	/**
@@ -100,8 +95,8 @@ public final class SwingUtils {
 	 */
 	private static GroupLayout.Group createHorizontalComponentsLayout(final GroupLayout layout, final Map<JLabel, JTextField> components) {
 		Validators.validateArgumentNotNull(layout, "Layout");
-		Validators.validateArgumentNotNull(components, "Components");
-		Validators.validateMapNotContainNull(components, "Components");
+		Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
+		Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
 
 		final GroupLayout.Group group = layout.createParallelGroup();
 		for (Map.Entry<JLabel, JTextField> data : components.entrySet()) {
@@ -120,9 +115,9 @@ public final class SwingUtils {
 	 */
 	private static GroupLayout.Group createHorizontalDataComponentsLayout(final GroupLayout layout, final JLabel label, final JTextField data) {
 		return layout.createSequentialGroup()
-				.addComponent(label, HORIZONTAL_LABEL_SIZE, HORIZONTAL_LABEL_SIZE, HORIZONTAL_LABEL_SIZE)
-				.addGap(HORIZONTAL_GAP_SIZE)
-				.addComponent(data, HORIZONTAL_DATA_SIZE, HORIZONTAL_DATA_SIZE, HORIZONTAL_DATA_SIZE);
+				.addComponent(label, SwingConstants.HORIZONTAL_LABEL_SIZE, SwingConstants.HORIZONTAL_LABEL_SIZE, SwingConstants.HORIZONTAL_LABEL_SIZE)
+				.addGap(SwingConstants.HORIZONTAL_GAP_SIZE)
+				.addComponent(data, SwingConstants.HORIZONTAL_DATA_SIZE, SwingConstants.HORIZONTAL_DATA_SIZE, SwingConstants.HORIZONTAL_DATA_SIZE);
 	}
 
 	/**
@@ -136,16 +131,17 @@ public final class SwingUtils {
 	 */
 	private static GroupLayout.Group createHorizontalButtonsLayout(final GroupLayout layout, final JButton... buttons) {
 		Validators.validateArgumentNotNull(layout, "Layout");
-		Validators.validateArgumentNotNull(buttons, "Buttons");
-		Validators.validateArrayNotContainNull(buttons, "Buttons");
+		Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
+		Validators.validateArrayNotContainNull(buttons, FIELD_BUTTONS);
 
 		final GroupLayout.Group group = layout.createSequentialGroup();
-		final int gapSize = (HORIZONTAL_LENGTH - buttons.length * HORIZONTAL_BUTTON_SIZE) / (buttons.length + 1);
-		group.addGap(HORIZONTAL_SHORT_GAP_SIZE);
+		final int gapSize = (SwingConstants.HORIZONTAL_LENGTH - buttons.length * SwingConstants.HORIZONTAL_BUTTON_SIZE) / (buttons.length + 1);
+		group.addGap(SwingConstants.HORIZONTAL_SHORT_GAP_SIZE);
 		for (JButton button : buttons) {
-			group.addGap(gapSize).addComponent(button, HORIZONTAL_BUTTON_SIZE, HORIZONTAL_BUTTON_SIZE, HORIZONTAL_BUTTON_SIZE);
+			group.addGap(gapSize)
+					.addComponent(button, SwingConstants.HORIZONTAL_BUTTON_SIZE, SwingConstants.HORIZONTAL_BUTTON_SIZE, SwingConstants.HORIZONTAL_BUTTON_SIZE);
 		}
-		group.addGap(gapSize).addGap(HORIZONTAL_SHORT_GAP_SIZE);
+		group.addGap(gapSize).addGap(SwingConstants.HORIZONTAL_SHORT_GAP_SIZE);
 		return group;
 	}
 
@@ -169,17 +165,17 @@ public final class SwingUtils {
 			final JButton... buttons) {
 		Validators.validateArgumentNotNull(layout, "Layout");
 		Validators.validateArgumentNotNull(comboBox, "Combo box");
-		Validators.validateArgumentNotNull(components, "Components");
-		Validators.validateArgumentNotNull(buttons, "Buttons");
-		Validators.validateMapNotContainNull(components, "Components");
-		Validators.validateArrayNotContainNull(buttons, "Buttons");
+		Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
+		Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
+		Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
+		Validators.validateArrayNotContainNull(buttons, FIELD_BUTTONS);
 
 		final GroupLayout.Group result = layout.createSequentialGroup()
-				.addGap(VERTICAL_GAP_SIZE)
-				.addComponent(comboBox, VERTICAL_COMBO_BOX_SIZE, VERTICAL_COMBO_BOX_SIZE, VERTICAL_COMBO_BOX_SIZE)
-				.addGap(VERTICAL_GAP_SIZE);
+				.addGap(SwingConstants.VERTICAL_GAP_SIZE)
+				.addComponent(comboBox, SwingConstants.VERTICAL_COMBO_BOX_SIZE, SwingConstants.VERTICAL_COMBO_BOX_SIZE, SwingConstants.VERTICAL_COMBO_BOX_SIZE)
+				.addGap(SwingConstants.VERTICAL_GAP_SIZE);
 		createVerticalComponentsLayout(layout, result, components);
-		result.addGroup(createVerticalButtonsLayout(layout, buttons)).addGap(VERTICAL_GAP_SIZE);
+		result.addGroup(createVerticalButtonsLayout(layout, buttons)).addGap(SwingConstants.VERTICAL_GAP_SIZE);
 		return result;
 	}
 
@@ -192,7 +188,7 @@ public final class SwingUtils {
 	 */
 	private static void createVerticalComponentsLayout(final GroupLayout layout, final GroupLayout.Group group, final Map<JLabel, JTextField> components) {
 		for (Map.Entry<JLabel, JTextField> data : components.entrySet()) {
-			group.addGroup(createVerticalComponents(layout, data.getKey(), data.getValue())).addGap(VERTICAL_GAP_SIZE);
+			group.addGroup(createVerticalComponents(layout, data.getKey(), data.getValue())).addGap(SwingConstants.VERTICAL_GAP_SIZE);
 		}
 	}
 
@@ -206,9 +202,9 @@ public final class SwingUtils {
 	 */
 	private static GroupLayout.Group createVerticalComponents(final GroupLayout layout, final JLabel label, final JTextField data) {
 		return layout.createParallelGroup()
-				.addComponent(label, VERTICAL_COMPONENT_SIZE, VERTICAL_COMPONENT_SIZE, VERTICAL_COMPONENT_SIZE)
-				.addGap(VERTICAL_GAP_SIZE)
-				.addComponent(data, VERTICAL_COMPONENT_SIZE, VERTICAL_COMPONENT_SIZE, VERTICAL_COMPONENT_SIZE);
+				.addComponent(label, SwingConstants.VERTICAL_COMPONENT_SIZE, SwingConstants.VERTICAL_COMPONENT_SIZE, SwingConstants.VERTICAL_COMPONENT_SIZE)
+				.addGap(SwingConstants.VERTICAL_GAP_SIZE)
+				.addComponent(data, SwingConstants.VERTICAL_COMPONENT_SIZE, SwingConstants.VERTICAL_COMPONENT_SIZE, SwingConstants.VERTICAL_COMPONENT_SIZE);
 	}
 
 	/**
@@ -221,7 +217,7 @@ public final class SwingUtils {
 	public static GroupLayout.Group createVerticalButtonsLayout(final GroupLayout layout, final JButton... buttons) {
 		final GroupLayout.Group group = layout.createParallelGroup();
 		for (JButton button : buttons) {
-			group.addComponent(button, VERTICAL_BUTTON_SIZE, VERTICAL_BUTTON_SIZE, VERTICAL_BUTTON_SIZE);
+			group.addComponent(button, SwingConstants.VERTICAL_BUTTON_SIZE, SwingConstants.VERTICAL_BUTTON_SIZE, SwingConstants.VERTICAL_BUTTON_SIZE);
 		}
 		return group;
 	}

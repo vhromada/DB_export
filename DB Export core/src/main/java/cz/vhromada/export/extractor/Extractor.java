@@ -94,9 +94,10 @@ public abstract class Extractor {
 	private List<String> getTables(final String databaseTableSQL) throws SQLException {
 		try (final PreparedStatement statement = connection.prepareStatement(databaseTableSQL)) {
 			final List<String> result = new ArrayList<>();
-			final ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				result.add(resultSet.getString(1));
+			try (final ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					result.add(resultSet.getString(1));
+				}
 			}
 			return result;
 		}
@@ -114,10 +115,11 @@ public abstract class Extractor {
 		try (final PreparedStatement statement = connection.prepareStatement(databaseColumnSQL)) {
 			statement.setString(1, table);
 			final List<ColumnDescription> result = new ArrayList<>();
-			final ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				final ColumnDescription columnDescription = new ColumnDescription(resultSet.getString(1), convertColumn(resultSet.getString(2)));
-				result.add(columnDescription);
+			try (final ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					final ColumnDescription columnDescription = new ColumnDescription(resultSet.getString(1), convertColumn(resultSet.getString(2)));
+					result.add(columnDescription);
+				}
 			}
 			return result;
 		}
@@ -135,37 +137,38 @@ public abstract class Extractor {
 		final String sql = String.format("SELECT * FROM %s", table);
 		try (final PreparedStatement statement = connection.prepareStatement(sql)) {
 			final List<RowItem> result = new ArrayList<>();
-			final ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				final List<ColumnItem> columns = new ArrayList<>();
-				for (ColumnDescription column : columnDescriptions) {
-					Object value = null;
-					switch (column.getType()) {
-						case BOOLEAN:
-							value = resultSet.getBoolean(column.getName());
-							break;
-						case DECIMAL:
-							value = resultSet.getBigDecimal(column.getName());
-							break;
-						case STRING:
-							value = resultSet.getString(column.getName());
-							break;
-						case DATE:
-							value = new DateTime(resultSet.getDate(column.getName()));
-							break;
-						case TIME:
-							value = new DateTime(resultSet.getTime(column.getName()));
-							break;
-						case TIMESTAMP:
-							value = new DateTime(resultSet.getTimestamp(column.getName()));
-							break;
-						case OBJECT:
-							value = resultSet.getObject(column.getName());
-							break;
+			try (final ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					final List<ColumnItem> columns = new ArrayList<>();
+					for (ColumnDescription column : columnDescriptions) {
+						Object value = null;
+						switch (column.getType()) {
+							case BOOLEAN:
+								value = resultSet.getBoolean(column.getName());
+								break;
+							case DECIMAL:
+								value = resultSet.getBigDecimal(column.getName());
+								break;
+							case STRING:
+								value = resultSet.getString(column.getName());
+								break;
+							case DATE:
+								value = new DateTime(resultSet.getDate(column.getName()));
+								break;
+							case TIME:
+								value = new DateTime(resultSet.getTime(column.getName()));
+								break;
+							case TIMESTAMP:
+								value = new DateTime(resultSet.getTimestamp(column.getName()));
+								break;
+							case OBJECT:
+								value = resultSet.getObject(column.getName());
+								break;
+						}
+						columns.add(new ColumnItem(column, value));
 					}
-					columns.add(new ColumnItem(column, value));
+					result.add(new RowItem(columns));
 				}
-				result.add(new RowItem(columns));
 			}
 			return result;
 		}

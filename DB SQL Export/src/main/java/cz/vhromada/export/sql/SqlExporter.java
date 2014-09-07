@@ -15,7 +15,6 @@ import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.entities.RowItem;
 import cz.vhromada.export.api.exceptions.ExportException;
 import cz.vhromada.validators.Validators;
-import cz.vhromada.validators.exceptions.ValidationException;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -49,7 +48,8 @@ public class SqlExporter extends AbstractExport {
 	 * @param fileName  name of SQL file which will be created
 	 * @throws IllegalArgumentException if directory is null
 	 *                                  or name of file is null
-	 * @throws ValidationException      if name of file is empty string
+	 * @throws cz.vhromada.validators.exceptions.ValidationException
+	 *                                  if name of file is empty string
 	 */
 	public SqlExporter(final Path directory, final String fileName) {
 		Validators.validateArgumentNotNull(directory, "Directory");
@@ -113,15 +113,16 @@ public class SqlExporter extends AbstractExport {
 		if (value == null) {
 			return null;
 		}
+		final String stringValue = "'%s'";
 		switch (column.getColumnDescription().getType()) {
 			case STRING:
-				return String.format("'%s'", value.toString().replaceAll("'", "''"));
+				return String.format(stringValue, value.toString().replaceAll("'", "''"));
 			case DATE:
-				return String.format("'%s'", DATE_FORMAT.print((DateTime) value));
+				return String.format(stringValue, DATE_FORMAT.print((DateTime) value));
 			case TIME:
-				return String.format("'%s'", TIME_FORMAT.print((DateTime) value));
+				return String.format(stringValue, TIME_FORMAT.print((DateTime) value));
 			case TIMESTAMP:
-				return String.format("'%s'", TIMESTAMP_FORMAT.print((DateTime) value));
+				return String.format(stringValue, TIMESTAMP_FORMAT.print((DateTime) value));
 			default:
 				return value.toString();
 		}
