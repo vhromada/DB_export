@@ -46,6 +46,7 @@
 	<modules>
 		<module>DB Export API</module>
 		<module>DB Export core</module>
+		<module>DB SQL Export</module>
 	</modules>
 
 	<dependencyManagement>
