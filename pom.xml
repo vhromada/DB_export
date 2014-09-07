@@ -47,6 +47,7 @@
 		<module>DB Export API</module>
 		<module>DB Export core</module>
 		<module>DB SQL Export</module>
+		<module>DB XML Export</module>
 	</modules>
 
 	<dependencyManagement>
@@ -62,6 +63,12 @@
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>2.4</version>
+			</dependency>
+			<!--XOM-->
+			<dependency>
+				<groupId>xom</groupId>
+				<artifactId>xom</artifactId>
+				<version>1.2.5</version>
 			</dependency>
 			<!--JUnit-->
 			<dependency>
