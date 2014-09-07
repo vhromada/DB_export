@@ -39,6 +39,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.source.version>7</project.source.version>
+		<org.slf4j.version>1.7.5</org.slf4j.version>
 		<org.springframework.version>4.1.0.RELEASE</org.springframework.version>
 		<org.apache.derby.version>10.10.2.0</org.apache.derby.version>
 	</properties>
@@ -48,6 +49,7 @@
 		<module>DB Export core</module>
 		<module>DB SQL Export</module>
 		<module>DB XML Export</module>
+		<module>DB Export Swing</module>
 	</modules>
 
 	<dependencyManagement>
@@ -69,6 +71,33 @@
 				<groupId>xom</groupId>
 				<artifactId>xom</artifactId>
 				<version>1.2.5</version>
+			</dependency>
+			<!--SLF4J-->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${org.slf4j.version}</version>
+			</dependency>
+			<!--Logback-->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.0.13</version>
 			</dependency>
 			<!--JUnit-->
 			<dependency>
@@ -119,11 +148,11 @@
 				<artifactId>derby</artifactId>
 				<version>${org.apache.derby.version}</version>
 			</dependency>
-			<!--<dependency>-->
-			<!--<groupId>org.apache.derby</groupId>-->
-			<!--<artifactId>derbyclient</artifactId>-->
-			<!--<version>${org.apache.derby.version}</version>-->
-			<!--</dependency>-->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derbyclient</artifactId>
+				<version>${org.apache.derby.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

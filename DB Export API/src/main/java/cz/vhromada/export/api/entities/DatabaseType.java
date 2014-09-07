@@ -5,7 +5,7 @@ package cz.vhromada.export.api.entities;
  *
  * @author Vladimir Hromada
  */
-public enum Type {
+public enum DatabaseType {
 
 	/** H2 DB */
 	H2,

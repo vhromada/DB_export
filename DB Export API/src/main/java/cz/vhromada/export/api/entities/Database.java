@@ -13,7 +13,7 @@ public class Database {
 	private DataSource dataSource;
 
 	/** Type */
-	private Type type;
+	private DatabaseType type;
 
 	/** Creates a new instance of Database. */
 	public Database() {
@@ -25,7 +25,7 @@ public class Database {
 	 * @param dataSource data source
 	 * @param type       type
 	 */
-	public Database(final DataSource dataSource, final Type type) {
+	public Database(final DataSource dataSource, final DatabaseType type) {
 		this.dataSource = dataSource;
 		this.type = type;
 	}
@@ -53,7 +53,7 @@ public class Database {
 	 *
 	 * @return type
 	 */
-	public Type getType() {
+	public DatabaseType getType() {
 		return type;
 	}
 
@@ -62,7 +62,7 @@ public class Database {
 	 *
 	 * @param type type
 	 */
-	public void setType(final Type type) {
+	public void setType(final DatabaseType type) {
 		this.type = type;
 	}
 

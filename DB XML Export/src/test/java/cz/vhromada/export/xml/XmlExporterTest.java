@@ -23,9 +23,9 @@ import cz.vhromada.export.api.entities.ColumnDescription;
 import cz.vhromada.export.api.entities.ColumnItem;
 import cz.vhromada.export.api.entities.ColumnType;
 import cz.vhromada.export.api.entities.Database;
+import cz.vhromada.export.api.entities.DatabaseType;
 import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.entities.RowItem;
-import cz.vhromada.export.api.entities.Type;
 import cz.vhromada.export.api.exceptions.ExportException;
 import cz.vhromada.validators.exceptions.ValidationException;
 import org.h2.jdbc.JdbcConnection;
@@ -76,7 +76,7 @@ public class XmlExporterTest {
 	@Before
 	public void setUp() {
 		xmlExporter = new XmlExporter(DIRECTORY, FILE);
-		database = new Database(dataSource, Type.H2);
+		database = new Database(dataSource, DatabaseType.H2);
 	}
 
 	/** Test method for {@link XmlExporter#XmlExporter(Path, String)} with null directory. */

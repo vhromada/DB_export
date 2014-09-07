@@ -8,8 +8,8 @@ import java.sql.Connection;
 import javax.sql.DataSource;
 
 import cz.vhromada.export.api.entities.Database;
+import cz.vhromada.export.api.entities.DatabaseType;
 import cz.vhromada.export.api.entities.ExtractData;
-import cz.vhromada.export.api.entities.Type;
 import cz.vhromada.export.api.exceptions.ExportException;
 import org.junit.Test;
 
@@ -35,7 +35,7 @@ public class AbstractExportTest {
 	/** Test method for {@link AbstractExport#extract(Database, Connection)} with null connection. */
 	@Test(expected = IllegalArgumentException.class)
 	public void testExtractWithNullConnection() throws ExportException {
-		new AbstractExportImpl().extract(new Database(mock(DataSource.class), Type.H2), null);
+		new AbstractExportImpl().extract(new Database(mock(DataSource.class), DatabaseType.H2), null);
 	}
 
 	/** Test method for {@link AbstractExport#export(ExtractData, Charset)} with null extracted data from database. */
