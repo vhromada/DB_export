@@ -22,48 +22,48 @@ import org.slf4j.LoggerFactory;
  */
 public final class Main {
 
-	/** Logger */
-	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    /** Logger */
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-	/** Creates a new instance of Main. */
-	private Main() {
-	}
+    /** Creates a new instance of Main. */
+    private Main() {
+    }
 
-	/**
-	 * Main method.
-	 *
-	 * @param args the command line arguments
-	 */
-	public static void main(final String... args) {
-		try {
-			final File file = new File("Settings.properties");
-			if (file.exists()) {
-				final Properties properties = new Properties();
-				try (Reader reader = new BufferedReader(new FileReader(file))) {
-					properties.load(reader);
-				}
-				final String os = properties.getProperty("OS");
-				if (os != null && "Windows".equals(os)) {
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-				}
-				final Charset charset = Charset.forName(properties.getProperty("charset", "UTF-8"));
-				EventQueue.invokeLater(new Runnable() {
+    /**
+     * Main method.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String... args) {
+        try {
+            final File file = new File("Settings.properties");
+            if (file.exists()) {
+                final Properties properties = new Properties();
+                try (Reader reader = new BufferedReader(new FileReader(file))) {
+                    properties.load(reader);
+                }
+                final String os = properties.getProperty("OS");
+                if (os != null && "Windows".equals(os)) {
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                }
+                final Charset charset = Charset.forName(properties.getProperty("charset", "UTF-8"));
+                EventQueue.invokeLater(new Runnable() {
 
-					@Override
-					public void run() {
-						new DbChoose(charset).setVisible(true);
-					}
+                    @Override
+                    public void run() {
+                        new DbChoose(charset).setVisible(true);
+                    }
 
-				});
-			} else {
-				logger.error("There isn't settings file (Settings.properties).");
-				System.exit(1);
-			}
-		} catch (final IOException ex) {
-			logger.error("Error in loading properties file.", ex);
-		} catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-			logger.error("Error in setting look and feel.", ex);
-		}
-	}
+                });
+            } else {
+                logger.error("There isn't settings file (Settings.properties).");
+                System.exit(1);
+            }
+        } catch (final IOException ex) {
+            logger.error("Error in loading properties file.", ex);
+        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            logger.error("Error in setting look and feel.", ex);
+        }
+    }
 
 }

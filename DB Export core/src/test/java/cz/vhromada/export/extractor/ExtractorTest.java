@@ -12,40 +12,40 @@ import org.junit.Test;
  */
 public class ExtractorTest {
 
-	/** Test method for {@link Extractor#Extractor(Connection)} with null connection. */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithNullConnection() {
-		new ExtractorImpl(null);
-	}
+    /** Test method for {@link Extractor#Extractor(Connection)} with null connection. */
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithNullConnection() {
+        new ExtractorImpl(null);
+    }
 
-	/** A class represents mock implementation of {@link Extractor}. */
-	private class ExtractorImpl extends Extractor {
+    /** A class represents mock implementation of {@link Extractor}. */
+    private static final class ExtractorImpl extends Extractor {
 
-		/**
-		 * Creates a new instance of ExtractorImpl.
-		 *
-		 * @param connection connection
-		 * @throws IllegalArgumentException if connection is null
-		 */
-		protected ExtractorImpl(final Connection connection) {
-			super(connection);
-		}
+        /**
+         * Creates a new instance of ExtractorImpl.
+         *
+         * @param connection connection
+         * @throws IllegalArgumentException if connection is null
+         */
+        private ExtractorImpl(final Connection connection) {
+            super(connection);
+        }
 
-		@Override
-		protected String getDatabaseTableSQL() {
-			throw new UnsupportedOperationException("Mock operation");
-		}
+        @Override
+        protected String getDatabaseTableSQL() {
+            throw new UnsupportedOperationException("Mock operation");
+        }
 
-		@Override
-		protected String getDatabaseColumnSQL() {
-			throw new UnsupportedOperationException("Mock operation");
-		}
+        @Override
+        protected String getDatabaseColumnSQL() {
+            throw new UnsupportedOperationException("Mock operation");
+        }
 
-		@Override
-		protected ColumnType convertColumn(final String column) {
-			throw new UnsupportedOperationException("Mock operation");
-		}
+        @Override
+        protected ColumnType convertColumn(final String column) {
+            throw new UnsupportedOperationException("Mock operation");
+        }
 
-	}
+    }
 
 }

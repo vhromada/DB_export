@@ -7,17 +7,17 @@ package cz.vhromada.export.api.exceptions;
  */
 public class ExportException extends Exception {
 
-	/** SerialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** SerialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates a new instance of ExportException.
-	 *
-	 * @param message message
-	 * @param cause   cause
-	 */
-	public ExportException(final String message, final Throwable cause) {
-		super(message, cause);
-	}
+    /**
+     * Creates a new instance of ExportException.
+     *
+     * @param message message
+     * @param cause   cause
+     */
+    public ExportException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
 
 }

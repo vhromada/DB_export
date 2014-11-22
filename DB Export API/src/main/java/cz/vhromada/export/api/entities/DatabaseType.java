@@ -7,13 +7,13 @@ package cz.vhromada.export.api.entities;
  */
 public enum DatabaseType {
 
-	/** H2 DB */
-	H2,
+    /** H2 DB */
+    H2,
 
-	/** HSQL DB */
-	HSQL,
+    /** HSQL DB */
+    HSQL,
 
-	/** Derby DB (Java DB) */
-	DERBY
+    /** Derby DB (Java DB) */
+    DERBY
 
 }

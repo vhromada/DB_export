@@ -22,29 +22,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:hsqlContext.xml")
 public class HsqlExtractorTest {
 
-	/** Data source */
-	@Autowired
-	private DataSource dataSource;
+    /** Data source */
+    @Autowired
+    private DataSource dataSource;
 
-	/** Test method for {@link HsqlExtractor#HsqlExtractor(Connection)} with null connection. */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithNullConnection() {
-		new HsqlExtractor(null);
-	}
+    /** Test method for {@link HsqlExtractor#HsqlExtractor(Connection)} with null connection. */
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorWithNullConnection() {
+        new HsqlExtractor(null);
+    }
 
-	/**
-	 * Test method for {@link DerbyExtractor#extract()}.
-	 *
-	 * @throws SQLException    if getting connection failed
-	 * @throws ExportException if extracting data failed
-	 */
-	@Test
-	public void testExtract() throws SQLException, ExportException {
-		try (final Connection connection = dataSource.getConnection()) {
-			final ExtractData expectedExtractData = ExtractorTestUtils.getExpectedExtractData();
-			final ExtractData actualExtractData = new HsqlExtractor(connection).extract();
-			ExtractorTestUtils.assertExtractDataDeepEquals(expectedExtractData, actualExtractData);
-		}
-	}
+    /**
+     * Test method for {@link DerbyExtractor#extract()}.
+     *
+     * @throws SQLException    if getting connection failed
+     * @throws ExportException if extracting data failed
+     */
+    @Test
+    public void testExtract() throws SQLException, ExportException {
+        try (final Connection connection = dataSource.getConnection()) {
+            final ExtractData expectedExtractData = ExtractorTestUtils.getExpectedExtractData();
+            final ExtractData actualExtractData = new HsqlExtractor(connection).extract();
+            ExtractorTestUtils.assertExtractDataDeepEquals(expectedExtractData, actualExtractData);
+        }
+    }
 
 }

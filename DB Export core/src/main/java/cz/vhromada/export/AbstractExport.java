@@ -21,52 +21,52 @@ import cz.vhromada.validators.Validators;
  */
 public abstract class AbstractExport implements Export {
 
-	@Override
-	public Connection getConnection(final Database database) throws ExportException {
-		Validators.validateArgumentNotNull(database, "Database description");
+    @Override
+    public Connection getConnection(final Database database) throws ExportException {
+        Validators.validateArgumentNotNull(database, "Database description");
 
-		try {
-			return database.getDataSource().getConnection();
-		} catch (final SQLException ex) {
-			throw new ExportException("Getting connection failed.", ex);
-		}
-	}
+        try {
+            return database.getDataSource().getConnection();
+        } catch (final SQLException ex) {
+            throw new ExportException("Getting connection failed.", ex);
+        }
+    }
 
-	@Override
-	public ExtractData extract(final Database database, final Connection connection) throws ExportException {
-		Validators.validateArgumentNotNull(database, "Database description");
-		Validators.validateArgumentNotNull(connection, "Connection");
+    @Override
+    public ExtractData extract(final Database database, final Connection connection) throws ExportException {
+        Validators.validateArgumentNotNull(database, "Database description");
+        Validators.validateArgumentNotNull(connection, "Connection");
 
-		Extractor extractor;
-		switch (database.getType()) {
-			case H2:
-				extractor = new H2Extractor(connection);
-				break;
-			case HSQL:
-				extractor = new HsqlExtractor(connection);
-				break;
-			default:
-				extractor = new DerbyExtractor(connection);
-				break;
-		}
-		return extractor.extract();
-	}
+        final Extractor extractor;
+        switch (database.getType()) {
+            case H2:
+                extractor = new H2Extractor(connection);
+                break;
+            case HSQL:
+                extractor = new HsqlExtractor(connection);
+                break;
+            default:
+                extractor = new DerbyExtractor(connection);
+                break;
+        }
+        return extractor.extract();
+    }
 
-	@Override
-	public void export(final ExtractData extractData, final Charset charset) throws ExportException {
-		Validators.validateArgumentNotNull(extractData, "Extract data from database");
-		Validators.validateArgumentNotNull(charset, "Charset");
+    @Override
+    public void export(final ExtractData extractData, final Charset charset) throws ExportException {
+        Validators.validateArgumentNotNull(extractData, "Extract data from database");
+        Validators.validateArgumentNotNull(charset, "Charset");
 
-		exportData(extractData, charset);
-	}
+        exportData(extractData, charset);
+    }
 
-	/**
-	 * Exports data from database.
-	 *
-	 * @param extractData extracted data from database
-	 * @param charset     charset
-	 * @throws ExportException if exporting data failed
-	 */
-	protected abstract void exportData(final ExtractData extractData, final Charset charset) throws ExportException;
+    /**
+     * Exports data from database.
+     *
+     * @param extractData extracted data from database
+     * @param charset     charset
+     * @throws ExportException if exporting data failed
+     */
+    protected abstract void exportData(final ExtractData extractData, final Charset charset) throws ExportException;
 
 }
