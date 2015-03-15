@@ -7,25 +7,39 @@ package cz.vhromada.export.api.entities;
  */
 public enum ColumnType {
 
-    /** Boolean */
+    /**
+     * Boolean
+     */
     BOOLEAN,
 
-    /** Decimal */
+    /**
+     * Decimal
+     */
     DECIMAL,
 
-    /** String */
+    /**
+     * String
+     */
     STRING,
 
-    /** Date */
+    /**
+     * Date
+     */
     DATE,
 
-    /** Time */
+    /**
+     * Time
+     */
     TIME,
 
-    /** Timestamp */
+    /**
+     * Timestamp
+     */
     TIMESTAMP,
 
-    /** Object */
+    /**
+     * Object
+     */
     OBJECT
 
 }

@@ -23,11 +23,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:derbyContext.xml")
 public class DerbyExtractorTest {
 
-    /** Data source */
+    /**
+     * Data source
+     */
     @Autowired
     private DataSource dataSource;
 
-    /** Test method for {@link DerbyExtractor#DerbyExtractor(Connection)} with null connection. */
+    /**
+     * Test method for {@link DerbyExtractor#DerbyExtractor(Connection)} with null connection.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullConnection() {
         new DerbyExtractor(null);

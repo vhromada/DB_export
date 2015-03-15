@@ -7,13 +7,19 @@ package cz.vhromada.export.api.entities;
  */
 public class ColumnDescription {
 
-    /** Name */
+    /**
+     * Name
+     */
     private String name;
 
-    /** Type */
+    /**
+     * Type
+     */
     private ColumnType type;
 
-    /** Creates a new instance of ColumnDescription. */
+    /**
+     * Creates a new instance of ColumnDescription.
+     */
     public ColumnDescription() {
     }
 

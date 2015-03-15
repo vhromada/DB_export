@@ -23,10 +23,14 @@ import org.slf4j.LoggerFactory;
  */
 public class ExportDialog extends JDialog {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(ExportDialog.class);
 
-    /** SerialVersionUID */
+    /**
+     * SerialVersionUID
+     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -75,16 +79,24 @@ public class ExportDialog extends JDialog {
         swingWorker.execute();
     }
 
-    /** A class represents swing worker for exporting data. */
+    /**
+     * A class represents swing worker for exporting data.
+     */
     private final class ExportingSwingWorker extends SwingWorker<Object, Object> {
 
-        /** Export */
+        /**
+         * Export
+         */
         private Export export;
 
-        /** Database description */
+        /**
+         * Database description
+         */
         private Database database;
 
-        /** Charset */
+        /**
+         * Charset
+         */
         private Charset charset;
 
         /**
@@ -118,7 +130,9 @@ public class ExportDialog extends JDialog {
             return null;
         }
 
-        /** Executed on the Event Dispatch Thread after the {@link #doInBackground()} method is finished. */
+        /**
+         * Executed on the Event Dispatch Thread after the {@link #doInBackground()} method is finished.
+         */
         @Override
         protected void done() {
             try {

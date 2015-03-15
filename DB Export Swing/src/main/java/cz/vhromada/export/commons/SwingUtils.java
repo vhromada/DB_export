@@ -14,13 +14,19 @@ import cz.vhromada.validators.Validators;
  */
 public final class SwingUtils {
 
-    /** Name of field components */
+    /**
+     * Name of field components
+     */
     private static final String FIELD_COMPONENTS = "Components";
 
-    /** Name of field buttons */
+    /**
+     * Name of field buttons
+     */
     private static final String FIELD_BUTTONS = "Buttons";
 
-    /** Creates a new instance of SwingUtils. */
+    /**
+     * Creates a new instance of SwingUtils.
+     */
     private SwingUtils() {
     }
 

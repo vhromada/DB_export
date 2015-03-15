@@ -26,7 +26,9 @@ import org.joda.time.DateTime;
  */
 public abstract class Extractor {
 
-    /** Connection */
+    /**
+     * Connection
+     */
     private Connection connection;
 
     /**

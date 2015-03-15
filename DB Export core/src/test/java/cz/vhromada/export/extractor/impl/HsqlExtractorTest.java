@@ -23,11 +23,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:hsqlContext.xml")
 public class HsqlExtractorTest {
 
-    /** Data source */
+    /**
+     * Data source
+     */
     @Autowired
     private DataSource dataSource;
 
-    /** Test method for {@link HsqlExtractor#HsqlExtractor(Connection)} with null connection. */
+    /**
+     * Test method for {@link HsqlExtractor#HsqlExtractor(Connection)} with null connection.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullConnection() {
         new HsqlExtractor(null);

@@ -31,40 +31,64 @@ import org.slf4j.LoggerFactory;
  */
 public class ExportChoose extends JFrame {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(ExportChoose.class);
 
-    /** Serial version UID */
+    /**
+     * Serial version UID
+     */
     private static final long serialVersionUID = 1L;
 
-    /** Combo box for exportation types */
+    /**
+     * Combo box for exportation types
+     */
     private JComboBox<String> exportType = new JComboBox<>(new String[]{ "SQL", "XML" });
 
-    /** Label for directory */
+    /**
+     * Label for directory
+     */
     private JLabel directoryLabel = new JLabel("Directory");
 
-    /** Text field for directory */
+    /**
+     * Text field for directory
+     */
     private JTextField directoryData = new JTextField();
 
-    /** Label for file */
+    /**
+     * Label for file
+     */
     private JLabel fileLabel = new JLabel("File");
 
-    /** Text field for file */
+    /**
+     * Text field for file
+     */
     private JTextField fileData = new JTextField();
 
-    /** Button Back */
+    /**
+     * Button Back
+     */
     private JButton backButton = new JButton("Back", Pictures.getPicture("back"));
 
-    /** Button ExportChoose */
+    /**
+     * Button ExportChoose
+     */
     private JButton exportButton = new JButton("ExportChoose", Pictures.getPicture("export"));
 
-    /** Button Exit */
+    /**
+     * Button Exit
+     */
     private JButton exitButton = new JButton("Exit", Pictures.getPicture("exit"));
 
-    /** Database description */
+    /**
+     * Database description
+     */
     private Database database;
 
-    /** Charset */
+    /**
+     * Charset
+     */
     private Charset charset;
 
     /**
@@ -151,12 +175,16 @@ public class ExportChoose extends JFrame {
         setLocationRelativeTo(getRootPane());
     }
 
-    /** Performs action for combo box for exportation types. */
+    /**
+     * Performs action for combo box for exportation types.
+     */
     private void exportTypeAction() {
         exportButton.setEnabled(isInputValid());
     }
 
-    /** Performs action for button Back. */
+    /**
+     * Performs action for button Back.
+     */
     private void backAction() {
         EventQueue.invokeLater(new Runnable() {
 
@@ -170,7 +198,9 @@ public class ExportChoose extends JFrame {
 
     }
 
-    /** Performs action for button ExportChoose. */
+    /**
+     * Performs action for button ExportChoose.
+     */
     private void exportAction() {
         logger.info("Type: {}", exportType.getSelectedItem());
         logger.info("Directory: {}", directoryData.getText());

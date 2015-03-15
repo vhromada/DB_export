@@ -48,51 +48,75 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:dataSourceContext.xml")
 public class SqlExporterTest {
 
-    /** Date format */
+    /**
+     * Date format
+     */
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd");
 
-    /** Time format */
+    /**
+     * Time format
+     */
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm:ss");
 
-    /** Timestamp format */
+    /**
+     * Timestamp format
+     */
     private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
-    /** Directory */
+    /**
+     * Directory
+     */
     private static final Path DIRECTORY = Paths.get("").resolve("target");
 
-    /** File name */
+    /**
+     * File name
+     */
     private static final String FILE = "temp.sql";
 
-    /** Data source */
+    /**
+     * Data source
+     */
     @Autowired
     private DataSource dataSource;
 
-    /** Instance of {@link SqlExporter} */
+    /**
+     * Instance of {@link SqlExporter}
+     */
     private SqlExporter sqlExporter;
 
-    /** Instance of {@link Database} */
+    /**
+     * Instance of {@link Database}
+     */
     private Database database;
 
-    /** Initializes sqlExporter and database. */
+    /**
+     * Initializes sqlExporter and database.
+     */
     @Before
     public void setUp() {
         sqlExporter = new SqlExporter(DIRECTORY, FILE);
         database = new Database(dataSource, DatabaseType.H2);
     }
 
-    /** Test method for {@link SqlExporter#SqlExporter(Path, String)} with null directory. */
+    /**
+     * Test method for {@link SqlExporter#SqlExporter(Path, String)} with null directory.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullDirectory() {
         new SqlExporter(null, FILE);
     }
 
-    /** Test method for {@link SqlExporter#SqlExporter(Path, String)} with null file name. */
+    /**
+     * Test method for {@link SqlExporter#SqlExporter(Path, String)} with null file name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullFileName() {
         new SqlExporter(DIRECTORY, null);
     }
 
-    /** Test method for {@link SqlExporter#SqlExporter(Path, String)} with empty string as file name. */
+    /**
+     * Test method for {@link SqlExporter#SqlExporter(Path, String)} with empty string as file name.
+     */
     @Test(expected = ValidationException.class)
     public void testConstructorWithEmptyFileName() {
         new SqlExporter(DIRECTORY, "");

@@ -14,7 +14,9 @@ import cz.vhromada.validators.Validators;
  */
 public final class Pictures {
 
-    /** Pictures (Map: Name -> Picture) */
+    /**
+     * Pictures (Map: Name -> Picture)
+     */
     private static final Map<String, ImageIcon> PICTURES;
 
     static {
@@ -25,7 +27,9 @@ public final class Pictures {
         PICTURES.put("export", new ImageIcon("pics/export.jpg"));
     }
 
-    /** Creates a new instance of Pictures. */
+    /**
+     * Creates a new instance of Pictures.
+     */
     private Pictures() {
     }
 

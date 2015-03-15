@@ -27,19 +27,29 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class SqlExporter extends AbstractExport {
 
-    /** Date format */
+    /**
+     * Date format
+     */
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd");
 
-    /** Time format */
+    /**
+     * Time format
+     */
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm:ss'");
 
-    /** Timestamp format */
+    /**
+     * Timestamp format
+     */
     private static final DateTimeFormatter TIMESTAMP_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
-    /** Directory where SQL file will be created */
+    /**
+     * Directory where SQL file will be created
+     */
     private Path directory;
 
-    /** Name of SQL file which will be created */
+    /**
+     * Name of SQL file which will be created
+     */
     private String fileName;
 
     /**

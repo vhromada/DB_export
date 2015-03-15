@@ -9,10 +9,14 @@ import java.util.List;
  */
 public class RowItem {
 
-    /** List of column items */
+    /**
+     * List of column items
+     */
     private List<ColumnItem> columnItems;
 
-    /** Creates a new instance of RowItem. */
+    /**
+     * Creates a new instance of RowItem.
+     */
     public RowItem() {
     }
 

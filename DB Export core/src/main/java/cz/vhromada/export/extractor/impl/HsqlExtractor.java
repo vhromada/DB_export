@@ -22,11 +22,6 @@ public class HsqlExtractor extends Extractor {
         super(connection);
     }
 
-    /**
-     * Returns database table extraction SQL.
-     *
-     * @return database table extraction SQL
-     */
     @Override
     protected String getDatabaseTableSQL() {
         return "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA LIKE 'PUBLIC%'";

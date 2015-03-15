@@ -7,7 +7,9 @@ package cz.vhromada.export.api.exceptions;
  */
 public class ExportException extends Exception {
 
-    /** SerialVersionUID */
+    /**
+     * SerialVersionUID
+     */
     private static final long serialVersionUID = 1L;
 
     /**

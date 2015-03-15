@@ -31,43 +31,69 @@ import org.slf4j.LoggerFactory;
  */
 public class DbChoose extends JFrame {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(DbChoose.class);
 
-    /** Serial version UID */
+    /**
+     * Serial version UID
+     */
     private static final long serialVersionUID = 1L;
 
-    /** List of default connection URLs */
+    /**
+     * List of default connection URLs
+     */
     private static final String[] DEFAULT_CONNECTION_URLS = { "jdbc:h2:<file>", "jdbc:hsqldb:file:<file>", "jdbc:derby://<host>:<port>/<database>" };
 
-    /** Combo box for databases */
+    /**
+     * Combo box for databases
+     */
     private JComboBox<String> databases = new JComboBox<>(new String[]{ "H2", "HSQL", "Derby" });
 
-    /** Label for connection URL */
+    /**
+     * Label for connection URL
+     */
     private JLabel urlLabel = new JLabel("Connection URL");
 
-    /** Text field for connection URL */
+    /**
+     * Text field for connection URL
+     */
     private JTextField urlData = new JTextField();
 
-    /** Label for username */
+    /**
+     * Label for username
+     */
     private JLabel usernameLabel = new JLabel("Username");
 
-    /** Text field for username */
+    /**
+     * Text field for username
+     */
     private JTextField usernameData = new JTextField();
 
-    /** Label for password */
+    /**
+     * Label for password
+     */
     private JLabel passwordLabel = new JLabel("Password");
 
-    /** Text field for password */
+    /**
+     * Text field for password
+     */
     private JTextField passwordData = new JTextField();
 
-    /** Button Continue */
+    /**
+     * Button Continue
+     */
     private JButton continueButton = new JButton("Continue", Pictures.getPicture("continue"));
 
-    /** Button Exit */
+    /**
+     * Button Exit
+     */
     private JButton exitButton = new JButton("Exit", Pictures.getPicture("exit"));
 
-    /** Charset */
+    /**
+     * Charset
+     */
     private Charset charset;
 
     /**
@@ -138,13 +164,17 @@ public class DbChoose extends JFrame {
         setLocationRelativeTo(getRootPane());
     }
 
-    /** Performs action for combo box for databases. */
+    /**
+     * Performs action for combo box for databases.
+     */
     private void databasesAction() {
         urlData.setText(databases.getSelectedIndex() >= 0 ? DEFAULT_CONNECTION_URLS[databases.getSelectedIndex()] : "");
         continueButton.setEnabled(isInputValid());
     }
 
-    /** Performs action for button Continue. */
+    /**
+     * Performs action for button Continue.
+     */
     private void continueAction() {
         EventQueue.invokeLater(new Runnable() {
 

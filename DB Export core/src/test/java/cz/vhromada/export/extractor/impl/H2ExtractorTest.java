@@ -23,11 +23,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:h2Context.xml")
 public class H2ExtractorTest {
 
-    /** Data source */
+    /**
+     * Data source
+     */
     @Autowired
     private DataSource dataSource;
 
-    /** Test method for {@link H2Extractor#H2Extractor(Connection)} with null connection. */
+    /**
+     * Test method for {@link H2Extractor#H2Extractor(Connection)} with null connection.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullConnection() {
         new H2Extractor(null);

@@ -21,38 +21,50 @@ import org.junit.Test;
  */
 public class AbstractExportTest {
 
-    /** Test method for {@link AbstractExport#getConnection(Database)} with null database description. */
+    /**
+     * Test method for {@link AbstractExport#getConnection(Database)} with null database description.
+     */
     @SuppressWarnings("resource")
     @Test(expected = IllegalArgumentException.class)
     public void testGetConnectionWithNullDatabase() throws ExportException {
         new AbstractExportImpl().getConnection(null);
     }
 
-    /** Test method for {@link AbstractExport#extract(Database, Connection)} with null database description. */
+    /**
+     * Test method for {@link AbstractExport#extract(Database, Connection)} with null database description.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractWithNullDatabase() throws ExportException {
         new AbstractExportImpl().extract(null, mock(Connection.class));
     }
 
-    /** Test method for {@link AbstractExport#extract(Database, Connection)} with null connection. */
+    /**
+     * Test method for {@link AbstractExport#extract(Database, Connection)} with null connection.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractWithNullConnection() throws ExportException {
         new AbstractExportImpl().extract(new Database(mock(DataSource.class), DatabaseType.H2), null);
     }
 
-    /** Test method for {@link AbstractExport#export(ExtractData, Charset)} with null extracted data from database. */
+    /**
+     * Test method for {@link AbstractExport#export(ExtractData, Charset)} with null extracted data from database.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExportWithNullExtractData() throws ExportException {
         new AbstractExportImpl().export(null, Charset.defaultCharset());
     }
 
-    /** Test method for {@link AbstractExport#export(ExtractData, Charset)} with null charset. */
+    /**
+     * Test method for {@link AbstractExport#export(ExtractData, Charset)} with null charset.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExportWithNullCharset() throws ExportException {
         new AbstractExportImpl().export(mock(ExtractData.class), null);
     }
 
-    /** A class represents mock implementation of {@link AbstractExport}. */
+    /**
+     * A class represents mock implementation of {@link AbstractExport}.
+     */
     private static final class AbstractExportImpl extends AbstractExport {
 
         @Override

@@ -7,13 +7,19 @@ package cz.vhromada.export.api.entities;
  */
 public class ColumnItem {
 
-    /** Column description */
+    /**
+     * Column description
+     */
     private ColumnDescription columnDescription;
 
-    /** Value stored in column */
+    /**
+     * Value stored in column
+     */
     private Object value;
 
-    /** Creates a new instance of ColumnItem. */
+    /**
+     * Creates a new instance of ColumnItem.
+     */
     public ColumnItem() {
     }
 

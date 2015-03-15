@@ -17,7 +17,9 @@ public class ExtractData {
      */
     private Map<String, List<RowItem>> data;
 
-    /** Creates a new instance of ExtractData. */
+    /**
+     * Creates a new instance of ExtractData.
+     */
     public ExtractData() {
     }
 

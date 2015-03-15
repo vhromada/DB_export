@@ -32,12 +32,6 @@ public class DerbyExtractor extends Extractor {
         return "SELECT col.COLUMNNAME, col.COLUMNDATATYPE FROM SYS.SYSCOLUMNS col, SYS.SYSTABLES tab WHERE col.REFERENCEID = tab.TABLEID AND tab.TABLENAME = ?";
     }
 
-    /**
-     * Converts column type.
-     *
-     * @param column column type
-     * @return converted column type
-     */
     @Override
     protected ColumnType convertColumn(final String column) {
         final String columnName = column.split("\\(")[0];

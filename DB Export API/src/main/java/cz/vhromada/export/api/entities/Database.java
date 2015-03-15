@@ -9,13 +9,19 @@ import javax.sql.DataSource;
  */
 public class Database {
 
-    /** Data source */
+    /**
+     * Data source
+     */
     private DataSource dataSource;
 
-    /** Type */
+    /**
+     * Type
+     */
     private DatabaseType type;
 
-    /** Creates a new instance of Database. */
+    /**
+     * Creates a new instance of Database.
+     */
     public Database() {
     }
 

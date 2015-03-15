@@ -23,10 +23,14 @@ import org.slf4j.LoggerFactory;
  */
 public final class Main {
 
-    /** Logger */
+    /**
+     * Logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-    /** Creates a new instance of Main. */
+    /**
+     * Creates a new instance of Main.
+     */
     private Main() {
     }
 

@@ -13,16 +13,22 @@ import org.junit.Test;
  */
 public class ExtractorTest {
 
-    /** Test method for {@link Extractor#Extractor(Connection)} with null connection. */
+    /**
+     * Test method for {@link Extractor#Extractor(Connection)} with null connection.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithNullConnection() {
         new ExtractorImpl(null);
     }
 
-    /** A class represents mock implementation of {@link Extractor}. */
+    /**
+     * A class represents mock implementation of {@link Extractor}.
+     */
     private static final class ExtractorImpl extends Extractor {
 
-        /** Message for exception */
+        /**
+         * Message for exception
+         */
         private static final String EXCEPTION_MESSAGE = "Mock operation";
 
         /**

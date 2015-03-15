@@ -28,13 +28,19 @@ import nu.xom.Serializer;
  */
 public class XmlExporter extends AbstractExport {
 
-    /** Namespace */
+    /**
+     * Namespace
+     */
     private static final String NAMESPACE = "http://vhromada.cz/export";
 
-    /** Directory where XML file will be created */
+    /**
+     * Directory where XML file will be created
+     */
     private Path directory;
 
-    /** Name of XML file which will be created */
+    /**
+     * Name of XML file which will be created
+     */
     private String fileName;
 
     /**
