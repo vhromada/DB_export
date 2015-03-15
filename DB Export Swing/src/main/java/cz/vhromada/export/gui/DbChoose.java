@@ -17,6 +17,7 @@ import cz.vhromada.export.commons.SwingUtils;
 import cz.vhromada.export.gui.data.InputValidator;
 import cz.vhromada.export.gui.data.Pictures;
 import cz.vhromada.validators.Validators;
+
 import org.apache.derby.jdbc.ClientDataSource;
 import org.h2.jdbcx.JdbcDataSource;
 import org.hsqldb.jdbc.JDBCDataSource;
@@ -193,7 +194,7 @@ public class DbChoose extends JFrame {
      * string.
      *
      * @return true if input is valid: database is selected and connection URL isn't empty string and username isn't empty string and password isn't empty
-     *         string
+     * string
      */
     private boolean isInputValid() {
         return databases.getSelectedIndex() >= 0 && !urlData.getText().isEmpty() && !usernameData.getText().isEmpty() && !passwordData.getText().isEmpty();

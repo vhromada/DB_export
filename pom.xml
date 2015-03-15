@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xmlns="http://maven.apache.org/POM/4.0.0"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cz.vhromada.export</groupId>
@@ -55,25 +55,25 @@
 	<dependencyManagement>
 		<dependencies>
 			<!--Validators-->
-			<dependency>
+            <dependency>
 				<groupId>cz.vhromada.validators</groupId>
 				<artifactId>validators</artifactId>
 				<version>1.0.0</version>
 			</dependency>
-			<!--Joda time-->
-			<dependency>
+            <!--Joda time-->
+            <dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>2.4</version>
 			</dependency>
-			<!--XOM-->
-			<dependency>
+            <!--XOM-->
+            <dependency>
 				<groupId>xom</groupId>
 				<artifactId>xom</artifactId>
 				<version>1.2.5</version>
 			</dependency>
-			<!--SLF4J-->
-			<dependency>
+            <!--SLF4J-->
+            <dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${org.slf4j.version}</version>
@@ -93,28 +93,28 @@
 				<artifactId>log4j-over-slf4j</artifactId>
 				<version>${org.slf4j.version}</version>
 			</dependency>
-			<!--Logback-->
-			<dependency>
+            <!--Logback-->
+            <dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>1.0.13</version>
 			</dependency>
-			<!--JUnit-->
-			<dependency>
+            <!--JUnit-->
+            <dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 				<scope>test</scope>
 			</dependency>
-			<!--Mockito-->
-			<dependency>
+            <!--Mockito-->
+            <dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
 				<version>1.9.5</version>
 				<scope>test</scope>
 			</dependency>
-			<!--Spring-->
-			<dependency>
+            <!--Spring-->
+            <dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${org.springframework.version}</version>
@@ -132,8 +132,8 @@
 				<version>${org.springframework.version}</version>
 				<scope>test</scope>
 			</dependency>
-			<!--Databases-->
-			<dependency>
+            <!--Databases-->
+            <dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>1.3.171</version>

@@ -15,6 +15,7 @@ import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.entities.RowItem;
 import cz.vhromada.export.api.exceptions.ExportException;
 import cz.vhromada.validators.Validators;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -46,10 +47,9 @@ public class SqlExporter extends AbstractExport {
      *
      * @param directory directory where SQL file will be created
      * @param fileName  name of SQL file which will be created
-     * @throws IllegalArgumentException if directory is null
-     *                                  or name of file is null
-     * @throws cz.vhromada.validators.exceptions.ValidationException
-     *                                  if name of file is empty string
+     * @throws IllegalArgumentException                              if directory is null
+     *                                                               or name of file is null
+     * @throws cz.vhromada.validators.exceptions.ValidationException if name of file is empty string
      */
     public SqlExporter(final Path directory, final String fileName) {
         Validators.validateArgumentNotNull(directory, "Directory");

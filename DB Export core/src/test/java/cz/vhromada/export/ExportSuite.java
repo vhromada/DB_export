@@ -1,6 +1,7 @@
 package cz.vhromada.export;
 
 import cz.vhromada.export.extractor.ExtractorSuite;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

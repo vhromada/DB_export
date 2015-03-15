@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.exceptions.ExportException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
