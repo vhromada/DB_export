@@ -5,7 +5,6 @@ import java.sql.Connection;
 
 import cz.vhromada.export.api.entities.Database;
 import cz.vhromada.export.api.entities.ExtractData;
-import cz.vhromada.export.api.exceptions.ExportException;
 
 /**
  * An interface represents database export.
@@ -19,31 +18,31 @@ public interface Export {
      *
      * @param database database description
      * @return extracted data
-     * @throws IllegalArgumentException if database description is null
-     * @throws ExportException          if getting connection failed
+     * @throws IllegalArgumentException                          if database description is null
+     * @throws cz.vhromada.export.api.exceptions.ExportException if getting connection failed
      */
-    Connection getConnection(Database database) throws ExportException;
+    Connection getConnection(Database database);
 
     /**
      * Extract data from database.
      *
      * @param connection connection
      * @return extracted data
-     * @throws IllegalArgumentException if database description is null
-     *                                  or connection is null
-     * @throws ExportException          if extracting data failed
+     * @throws IllegalArgumentException                          if database description is null
+     *                                                           or connection is null
+     * @throws cz.vhromada.export.api.exceptions.ExportException if extracting data failed
      */
-    ExtractData extract(Database database, Connection connection) throws ExportException;
+    ExtractData extract(Database database, Connection connection);
 
     /**
      * Exports database.
      *
      * @param extractData extracted data from database
      * @param charset     charset
-     * @throws IllegalArgumentException if extracted data from database is null
-     *                                  or charset is null
-     * @throws ExportException          if exporting data failed
+     * @throws IllegalArgumentException                          if extracted data from database is null
+     *                                                           or charset is null
+     * @throws cz.vhromada.export.api.exceptions.ExportException if exporting data failed
      */
-    void export(ExtractData extractData, Charset charset) throws ExportException;
+    void export(ExtractData extractData, Charset charset);
 
 }

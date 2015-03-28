@@ -1,6 +1,6 @@
 package cz.vhromada.export.gui;
 
-import java.awt.*;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.charset.Charset;
@@ -8,7 +8,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.sql.DataSource;
-import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentListener;
 
 import cz.vhromada.export.api.entities.Database;
@@ -216,7 +222,11 @@ public class DbChoose extends JFrame {
             default:
                 throw new IllegalArgumentException("Bad selected database.");
         }
-        return new Database(dataSource, type);
+        final Database database = new Database();
+        database.setDataSource(dataSource);
+        database.setType(type);
+
+        return database;
     }
 
     /**

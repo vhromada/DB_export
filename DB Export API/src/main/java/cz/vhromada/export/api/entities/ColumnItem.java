@@ -8,9 +8,9 @@ package cz.vhromada.export.api.entities;
 public class ColumnItem {
 
     /**
-     * Column description
+     * Description
      */
-    private ColumnDescription columnDescription;
+    private ColumnDescription description;
 
     /**
      * Value stored in column
@@ -18,38 +18,21 @@ public class ColumnItem {
     private Object value;
 
     /**
-     * Creates a new instance of ColumnItem.
+     * Returns description.
+     *
+     * @return description
      */
-    public ColumnItem() {
+    public ColumnDescription getDescription() {
+        return description;
     }
 
     /**
-     * Creates a new instance of ColumnItem.
+     * Sets a new value to description.
      *
-     * @param columnDescription column description
-     * @param value             value stored in column
+     * @param description new value
      */
-    public ColumnItem(final ColumnDescription columnDescription, final Object value) {
-        this.columnDescription = columnDescription;
-        this.value = value;
-    }
-
-    /**
-     * Returns column description.
-     *
-     * @return column description
-     */
-    public ColumnDescription getColumnDescription() {
-        return columnDescription;
-    }
-
-    /**
-     * Sets a new value to column description.
-     *
-     * @param columnDescription column description
-     */
-    public void setColumnDescription(final ColumnDescription columnDescription) {
-        this.columnDescription = columnDescription;
+    public void setDescription(final ColumnDescription description) {
+        this.description = description;
     }
 
     /**
@@ -64,7 +47,7 @@ public class ColumnItem {
     /**
      * Sets a new value to value stored in column.
      *
-     * @param value value stored in column
+     * @param value new value
      */
     public void setValue(final Object value) {
         this.value = value;

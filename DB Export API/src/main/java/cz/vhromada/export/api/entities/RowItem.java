@@ -10,41 +10,26 @@ import java.util.List;
 public class RowItem {
 
     /**
-     * List of column items
+     * List of columns
      */
-    private List<ColumnItem> columnItems;
+    private List<ColumnItem> columns;
 
     /**
-     * Creates a new instance of RowItem.
+     * Returns list of columns.
+     *
+     * @return list of columns
      */
-    public RowItem() {
+    public List<ColumnItem> getColumns() {
+        return columns;
     }
 
     /**
-     * Creates a new instance of RowItem.
+     * Sets a new value to list of columns.
      *
-     * @param columnItems list of column items
+     * @param columns new value
      */
-    public RowItem(final List<ColumnItem> columnItems) {
-        this.columnItems = columnItems;
-    }
-
-    /**
-     * Returns list of column items.
-     *
-     * @return list of column items
-     */
-    public List<ColumnItem> getColumnItems() {
-        return columnItems;
-    }
-
-    /**
-     * Sets a new value to list of column items.
-     *
-     * @param columnItems list of column items
-     */
-    public void setColumnItems(final List<ColumnItem> columnItems) {
-        this.columnItems = columnItems;
+    public void setColumns(final List<ColumnItem> columns) {
+        this.columns = columns;
     }
 
 }

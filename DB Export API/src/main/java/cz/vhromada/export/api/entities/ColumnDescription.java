@@ -18,23 +18,6 @@ public class ColumnDescription {
     private ColumnType type;
 
     /**
-     * Creates a new instance of ColumnDescription.
-     */
-    public ColumnDescription() {
-    }
-
-    /**
-     * Creates a new instance of ColumnDescription.
-     *
-     * @param name name
-     * @param type type
-     */
-    public ColumnDescription(final String name, final ColumnType type) {
-        this.name = name;
-        this.type = type;
-    }
-
-    /**
      * Returns name.
      *
      * @return name
@@ -46,7 +29,7 @@ public class ColumnDescription {
     /**
      * Sets a new value to name.
      *
-     * @param name name
+     * @param name new value
      */
     public void setName(final String name) {
         this.name = name;
@@ -64,7 +47,7 @@ public class ColumnDescription {
     /**
      * Sets a new value to type.
      *
-     * @param type type
+     * @param type new value
      */
     public void setType(final ColumnType type) {
         this.type = type;

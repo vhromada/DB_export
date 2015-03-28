@@ -61,8 +61,11 @@ public class XmlExporter extends AbstractExport {
         this.fileName = fileName;
     }
 
+    /**
+     * @throws ExportException if exporting data failed
+     */
     @Override
-    protected void exportData(final ExtractData extractData, final Charset charset) throws ExportException {
+    protected void exportData(final ExtractData extractData, final Charset charset) {
         final Document document = createXMLDocument(extractData);
         try {
             final Path path = Files.createDirectories(directory).resolve(fileName);
@@ -114,7 +117,7 @@ public class XmlExporter extends AbstractExport {
      */
     private static Element createRowElement(final RowItem rowItem) {
         final Element rowElement = new Element("row", NAMESPACE);
-        for (final ColumnItem columnItem : rowItem.getColumnItems()) {
+        for (final ColumnItem columnItem : rowItem.getColumns()) {
             rowElement.appendChild(createColumnElement(columnItem));
         }
         return rowElement;
@@ -128,8 +131,8 @@ public class XmlExporter extends AbstractExport {
      */
     private static Element createColumnElement(final ColumnItem columnItem) {
         final Element columnElement = new Element("column", NAMESPACE);
-        columnElement.addAttribute(new Attribute("name", columnItem.getColumnDescription().getName()));
-        columnElement.addAttribute(new Attribute("type", columnItem.getColumnDescription().getType().name()));
+        columnElement.addAttribute(new Attribute("name", columnItem.getDescription().getName()));
+        columnElement.addAttribute(new Attribute("type", columnItem.getDescription().getType().name()));
         columnElement.appendChild(columnItem.getValue() == null ? null : columnItem.getValue().toString());
         return columnElement;
     }

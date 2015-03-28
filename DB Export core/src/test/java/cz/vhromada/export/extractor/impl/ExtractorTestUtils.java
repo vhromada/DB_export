@@ -1,9 +1,5 @@
 package cz.vhromada.export.extractor.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,40 +60,14 @@ public final class ExtractorTestUtils {
         tableBRows.add(createRowB(20L, "ng", 97));
         tableBRows.add(createRowB(50L, "re", 572));
 
-        final Map<String, List<RowItem>> extractData = new HashMap<>();
-        extractData.put("A", tableARows);
-        extractData.put("B", tableBRows);
+        final Map<String, List<RowItem>> data = new HashMap<>();
+        data.put("A", tableARows);
+        data.put("B", tableBRows);
 
-        return new ExtractData(extractData);
-    }
+        final ExtractData extractData = new ExtractData();
+        extractData.setData(data);
 
-    /**
-     * Asserts deep extract data for equality.
-     *
-     * @param expected expected extract data
-     * @param actual   actual extract data
-     */
-    public static void assertExtractDataDeepEquals(final ExtractData expected, final ExtractData actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-
-        final Map<String, List<RowItem>> expectedExtractData = expected.getData();
-        final Map<String, List<RowItem>> actualExtractData = expected.getData();
-        assertNotNull(expectedExtractData);
-        assertNotNull(actualExtractData);
-        assertEquals(expectedExtractData.size(), actualExtractData.size());
-        assertEquals(expectedExtractData.keySet(), actualExtractData.keySet());
-        for (final Map.Entry<String, List<RowItem>> entry : expectedExtractData.entrySet()) {
-            assertTrue(actualExtractData.containsKey(entry.getKey()));
-            final List<RowItem> expectedRows = entry.getValue();
-            final List<RowItem> actualRows = actualExtractData.get(entry.getKey());
-            assertNotNull(expectedRows);
-            assertNotNull(actualRows);
-            assertEquals(expectedRows.size(), actualRows.size());
-            for (int i = 0; i < expectedRows.size(); i++) {
-                assertRowItemDeepEquals(expectedRows.get(i), actualRows.get(i));
-            }
-        }
+        return extractData;
     }
 
     /**
@@ -118,17 +88,21 @@ public final class ExtractorTestUtils {
     private static RowItem createRowA(final boolean a, final int b, final int c, final long d, final double e, final BigDecimal f, final String g,
             final String h, final String i, final String j) {
         final List<ColumnItem> columnItems = new ArrayList<>();
-        columnItems.add(new ColumnItem(new ColumnDescription("A", ColumnType.BOOLEAN), a));
-        columnItems.add(new ColumnItem(new ColumnDescription("B", ColumnType.DECIMAL), new BigDecimal(b)));
-        columnItems.add(new ColumnItem(new ColumnDescription("C", ColumnType.DECIMAL), new BigDecimal(c)));
-        columnItems.add(new ColumnItem(new ColumnDescription("D", ColumnType.DECIMAL), new BigDecimal(d)));
-        columnItems.add(new ColumnItem(new ColumnDescription("E", ColumnType.DECIMAL), new BigDecimal(e)));
-        columnItems.add(new ColumnItem(new ColumnDescription("F", ColumnType.DECIMAL), f));
-        columnItems.add(new ColumnItem(new ColumnDescription("G", ColumnType.STRING), g));
-        columnItems.add(new ColumnItem(new ColumnDescription("H", ColumnType.DATE), DATE_FORMAT.parseDateTime(h)));
-        columnItems.add(new ColumnItem(new ColumnDescription("I", ColumnType.TIME), TIME_FORMAT.parseDateTime(i)));
-        columnItems.add(new ColumnItem(new ColumnDescription("J", ColumnType.TIMESTAMP), TIMESTAMP_FORMAT.parseDateTime(j)));
-        return new RowItem(columnItems);
+        columnItems.add(newColumnItem(newColumnDescription("A", ColumnType.BOOLEAN), a));
+        columnItems.add(newColumnItem(newColumnDescription("B", ColumnType.DECIMAL), new BigDecimal(b)));
+        columnItems.add(newColumnItem(newColumnDescription("C", ColumnType.DECIMAL), new BigDecimal(c)));
+        columnItems.add(newColumnItem(newColumnDescription("D", ColumnType.DECIMAL), new BigDecimal(d)));
+        columnItems.add(newColumnItem(newColumnDescription("E", ColumnType.DECIMAL), new BigDecimal(e)));
+        columnItems.add(newColumnItem(newColumnDescription("F", ColumnType.DECIMAL), f));
+        columnItems.add(newColumnItem(newColumnDescription("G", ColumnType.STRING), g));
+        columnItems.add(newColumnItem(newColumnDescription("H", ColumnType.DATE), DATE_FORMAT.parseDateTime(h)));
+        columnItems.add(newColumnItem(newColumnDescription("I", ColumnType.TIME), TIME_FORMAT.parseDateTime(i)));
+        columnItems.add(newColumnItem(newColumnDescription("J", ColumnType.TIMESTAMP), TIMESTAMP_FORMAT.parseDateTime(j)));
+
+        final RowItem rowItem = new RowItem();
+        rowItem.setColumns(columnItems);
+
+        return rowItem;
     }
 
     /**
@@ -141,56 +115,44 @@ public final class ExtractorTestUtils {
      */
     private static RowItem createRowB(final long id, final String name, final int age) {
         final List<ColumnItem> columnItems = new ArrayList<>();
-        columnItems.add(new ColumnItem(new ColumnDescription("ID", ColumnType.DECIMAL), id));
-        columnItems.add(new ColumnItem(new ColumnDescription("NAME", ColumnType.STRING), name));
-        columnItems.add(new ColumnItem(new ColumnDescription("AGE", ColumnType.DECIMAL), age));
-        return new RowItem(columnItems);
+        columnItems.add(newColumnItem(newColumnDescription("ID", ColumnType.DECIMAL), id));
+        columnItems.add(newColumnItem(newColumnDescription("NAME", ColumnType.STRING), name));
+        columnItems.add(newColumnItem(newColumnDescription("AGE", ColumnType.DECIMAL), age));
+
+        final RowItem rowItem = new RowItem();
+        rowItem.setColumns(columnItems);
+
+        return rowItem;
     }
 
     /**
-     * Asserts deep row items for equality.
+     * Returns {@link ColumnDescription} with specified name and type.
      *
-     * @param expected expected row item
-     * @param actual   actual row item
+     * @param name name
+     * @param type type
+     * @return {@link ColumnDescription} with specified name and type
      */
-    private static void assertRowItemDeepEquals(final RowItem expected, final RowItem actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
+    private static ColumnDescription newColumnDescription(final String name, final ColumnType type) {
+        final ColumnDescription columnDescription = new ColumnDescription();
+        columnDescription.setName(name);
+        columnDescription.setType(type);
 
-        final List<ColumnItem> expectedColumns = expected.getColumnItems();
-        final List<ColumnItem> actualColumns = actual.getColumnItems();
-        assertNotNull(expectedColumns);
-        assertNotNull(actualColumns);
-        assertEquals(expectedColumns.size(), actualColumns.size());
-        for (int i = 0; i < expectedColumns.size(); i++) {
-            assertColumnItemDeepEquals(expectedColumns.get(i), actualColumns.get(i));
-        }
+        return columnDescription;
     }
 
     /**
-     * Asserts deep column items for equality.
+     * Returns {@link ColumnItem} with specified description and value.
      *
-     * @param expected expected column item
-     * @param actual   actual column item
+     * @param description description
+     * @param value       value
+     * @return {@link ColumnItem} with specified description and value
      */
-    private static void assertColumnItemDeepEquals(final ColumnItem expected, final ColumnItem actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertColumnDescriptionDeepEquals(expected.getColumnDescription(), actual.getColumnDescription());
-        assertEquals(expected.getValue(), actual.getValue());
-    }
+    private static ColumnItem newColumnItem(final ColumnDescription description, final Object value) {
+        final ColumnItem columnItem = new ColumnItem();
+        columnItem.setDescription(description);
+        columnItem.setValue(value);
 
-    /**
-     * Asserts deep column descriptions for equality.
-     *
-     * @param expected expected column description
-     * @param actual   actual column description
-     */
-    private static void assertColumnDescriptionDeepEquals(final ColumnDescription expected, final ColumnDescription actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getType(), actual.getType());
+        return columnItem;
     }
 
 }

@@ -5,12 +5,8 @@ import static org.mockito.Mockito.mock;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 
-import javax.sql.DataSource;
-
 import cz.vhromada.export.api.entities.Database;
-import cz.vhromada.export.api.entities.DatabaseType;
 import cz.vhromada.export.api.entities.ExtractData;
-import cz.vhromada.export.api.exceptions.ExportException;
 
 import org.junit.Test;
 
@@ -26,7 +22,7 @@ public class AbstractExportTest {
      */
     @SuppressWarnings("resource")
     @Test(expected = IllegalArgumentException.class)
-    public void testGetConnectionWithNullDatabase() throws ExportException {
+    public void testGetConnectionWithNullDatabase() {
         new AbstractExportImpl().getConnection(null);
     }
 
@@ -34,7 +30,7 @@ public class AbstractExportTest {
      * Test method for {@link AbstractExport#extract(Database, Connection)} with null database description.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExtractWithNullDatabase() throws ExportException {
+    public void testExtractWithNullDatabase() {
         new AbstractExportImpl().extract(null, mock(Connection.class));
     }
 
@@ -42,15 +38,15 @@ public class AbstractExportTest {
      * Test method for {@link AbstractExport#extract(Database, Connection)} with null connection.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExtractWithNullConnection() throws ExportException {
-        new AbstractExportImpl().extract(new Database(mock(DataSource.class), DatabaseType.H2), null);
+    public void testExtractWithNullConnection() {
+        new AbstractExportImpl().extract(mock(Database.class), null);
     }
 
     /**
      * Test method for {@link AbstractExport#export(ExtractData, Charset)} with null extracted data from database.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExportWithNullExtractData() throws ExportException {
+    public void testExportWithNullExtractData() {
         new AbstractExportImpl().export(null, Charset.defaultCharset());
     }
 
@@ -58,7 +54,7 @@ public class AbstractExportTest {
      * Test method for {@link AbstractExport#export(ExtractData, Charset)} with null charset.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testExportWithNullCharset() throws ExportException {
+    public void testExportWithNullCharset() {
         new AbstractExportImpl().export(mock(ExtractData.class), null);
     }
 

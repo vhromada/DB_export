@@ -70,8 +70,11 @@ public class SqlExporter extends AbstractExport {
         this.fileName = fileName;
     }
 
+    /**
+     * @throws ExportException if exporting data failed
+     */
     @Override
-    protected void exportData(final ExtractData extractData, final Charset charset) throws ExportException {
+    protected void exportData(final ExtractData extractData, final Charset charset) {
         final List<String> rows = new ArrayList<>();
         for (final Map.Entry<String, List<RowItem>> entry : extractData.getData().entrySet()) {
             final String table = entry.getKey();
@@ -96,13 +99,13 @@ public class SqlExporter extends AbstractExport {
      * @return created sql statement
      */
     private static String createSqlStatement(final String table, final RowItem rowItem) {
-        final List<ColumnItem> columns = rowItem.getColumnItems();
+        final List<ColumnItem> columns = rowItem.getColumns();
         final StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ");
         sql.append(table);
         sql.append(" (");
         for (final ColumnItem column : columns) {
-            sql.append(column.getColumnDescription().getName());
+            sql.append(column.getDescription().getName());
             if (columns.indexOf(column) < columns.size() - 1) {
                 sql.append(", ");
             }
@@ -124,7 +127,7 @@ public class SqlExporter extends AbstractExport {
             return null;
         }
         final String stringValue = "'%s'";
-        switch (column.getColumnDescription().getType()) {
+        switch (column.getDescription().getType()) {
             case STRING:
                 return String.format(stringValue, value.toString().replaceAll("'", "''"));
             case DATE:

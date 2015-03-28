@@ -5,7 +5,7 @@ package cz.vhromada.export.api.exceptions;
  *
  * @author Vladimir Hromada
  */
-public class ExportException extends Exception {
+public class ExportException extends RuntimeException {
 
     /**
      * SerialVersionUID

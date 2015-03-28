@@ -20,23 +20,6 @@ public class Database {
     private DatabaseType type;
 
     /**
-     * Creates a new instance of Database.
-     */
-    public Database() {
-    }
-
-    /**
-     * Creates a new instance of Database.
-     *
-     * @param dataSource data source
-     * @param type       type
-     */
-    public Database(final DataSource dataSource, final DatabaseType type) {
-        this.dataSource = dataSource;
-        this.type = type;
-    }
-
-    /**
      * Returns data source.
      *
      * @return data source
@@ -48,7 +31,7 @@ public class Database {
     /**
      * Sets a new value to data source.
      *
-     * @param dataSource data source
+     * @param dataSource new value
      */
     public void setDataSource(final DataSource dataSource) {
         this.dataSource = dataSource;
@@ -66,7 +49,7 @@ public class Database {
     /**
      * Sets a new value to type.
      *
-     * @param type type
+     * @param type new value
      */
     public void setType(final DatabaseType type) {
         this.type = type;

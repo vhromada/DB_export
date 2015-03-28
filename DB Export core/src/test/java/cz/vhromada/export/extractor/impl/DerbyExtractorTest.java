@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import cz.vhromada.export.api.entities.ExtractData;
-import cz.vhromada.export.api.exceptions.ExportException;
+import cz.vhromada.test.DeepAsserts;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,15 +40,15 @@ public class DerbyExtractorTest {
     /**
      * Test method for {@link DerbyExtractor#extract()}.
      *
-     * @throws SQLException    if getting connection failed
-     * @throws ExportException if extracting data failed
+     * @throws SQLException if getting connection failed
      */
     @Test
-    public void testExtract() throws SQLException, ExportException {
+    public void testExtract() throws SQLException {
         try (final Connection connection = dataSource.getConnection()) {
             final ExtractData expectedExtractData = ExtractorTestUtils.getExpectedExtractData();
             final ExtractData actualExtractData = new DerbyExtractor(connection).extract();
-            ExtractorTestUtils.assertExtractDataDeepEquals(expectedExtractData, actualExtractData);
+            DeepAsserts.assertNotNull(actualExtractData);
+            DeepAsserts.assertEquals(expectedExtractData, actualExtractData);
         }
     }
 

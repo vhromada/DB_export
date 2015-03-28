@@ -26,7 +26,7 @@ import cz.vhromada.export.api.entities.Database;
 import cz.vhromada.export.api.entities.DatabaseType;
 import cz.vhromada.export.api.entities.ExtractData;
 import cz.vhromada.export.api.entities.RowItem;
-import cz.vhromada.export.api.exceptions.ExportException;
+import cz.vhromada.test.DeepAsserts;
 import cz.vhromada.validators.exceptions.ValidationException;
 
 import org.h2.jdbc.JdbcConnection;
@@ -95,7 +95,9 @@ public class XmlExporterTest {
     @Before
     public void setUp() {
         xmlExporter = new XmlExporter(DIRECTORY, FILE);
-        database = new Database(dataSource, DatabaseType.H2);
+        database = new Database();
+        database.setDataSource(dataSource);
+        database.setType(DatabaseType.H2);
     }
 
     /**
@@ -125,11 +127,10 @@ public class XmlExporterTest {
     /**
      * Test method for {@link XmlExporter#getConnection(Database)}.
      *
-     * @throws ExportException if getting connection failed
-     * @throws SQLException    if closing connection failed
+     * @throws SQLException if closing connection failed
      */
     @Test
-    public void testGetConnection() throws ExportException, SQLException {
+    public void testGetConnection() throws SQLException {
         try (final Connection connection = xmlExporter.getConnection(database)) {
             assertNotNull(connection);
             assertTrue(connection instanceof JdbcConnection);
@@ -139,27 +140,25 @@ public class XmlExporterTest {
     /**
      * Test method for {@link XmlExporter#extract(Database, Connection)}.
      *
-     * @throws ExportException if extracting data failed
-     * @throws SQLException    if closing connection failed
+     * @throws SQLException if closing connection failed
      */
     @Test
-    public void testExtractData() throws ExportException, SQLException {
+    public void testExtractData() throws SQLException {
         try (final Connection connection = xmlExporter.getConnection(database)) {
             final ExtractData actualExtractData = xmlExporter.extract(database, connection);
-            assertNotNull(actualExtractData);
             final ExtractData expectedExtractData = getExtractData();
-            assertExtractDataDeepEquals(actualExtractData, expectedExtractData);
+            DeepAsserts.assertNotNull(actualExtractData);
+            DeepAsserts.assertEquals(expectedExtractData, actualExtractData);
         }
     }
 
     /**
      * Test method for {@link XmlExporter#export(ExtractData, Charset)}.
      *
-     * @throws ExportException if exporting data failed
-     * @throws IOException     if reading stored file failed
+     * @throws IOException if reading stored file failed
      */
     @Test
-    public void testExportData() throws ExportException, IOException {
+    public void testExportData() throws IOException {
         final Charset charset = Charset.forName("UTF-8");
         xmlExporter.export(getExtractData(), charset);
         final Path path = DIRECTORY.resolve(FILE);
@@ -178,15 +177,21 @@ public class XmlExporterTest {
     private static ExtractData getExtractData() {
         final List<RowItem> rowItems = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            final List<ColumnItem> columnItems = new ArrayList<>();
+            final List<ColumnItem> columns = new ArrayList<>();
             for (int j = 0; j < 8; j++) {
-                columnItems.add(getColumnItem(j, i + 1));
+                columns.add(getColumnItem(j, i + 1));
             }
-            rowItems.add(new RowItem(columnItems));
+            final RowItem rowItem = new RowItem();
+            rowItem.setColumns(columns);
+            rowItems.add(rowItem);
         }
         final Map<String, List<RowItem>> data = new HashMap<>();
         data.put("TAB", rowItems);
-        return new ExtractData(data);
+
+        final ExtractData extractData = new ExtractData();
+        extractData.setData(data);
+
+        return extractData;
     }
 
     /**
@@ -244,82 +249,15 @@ public class XmlExporterTest {
             default:
                 throw new IllegalArgumentException("Bad index");
         }
-        return new ColumnItem(new ColumnDescription(name, type), value);
-    }
+        final ColumnDescription columnDescription = new ColumnDescription();
+        columnDescription.setName(name);
+        columnDescription.setType(type);
 
-    /**
-     * Asserts deep extract data for equality.
-     *
-     * @param expected expected extract data
-     * @param actual   actual extract data
-     */
-    private static void assertExtractDataDeepEquals(final ExtractData expected, final ExtractData actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
+        final ColumnItem columnItem = new ColumnItem();
+        columnItem.setDescription(columnDescription);
+        columnItem.setValue(value);
 
-        final Map<String, List<RowItem>> expectedExtractData = expected.getData();
-        final Map<String, List<RowItem>> actualExtractData = expected.getData();
-        assertNotNull(expectedExtractData);
-        assertNotNull(actualExtractData);
-        assertEquals(expectedExtractData.size(), actualExtractData.size());
-        assertEquals(expectedExtractData.keySet(), actualExtractData.keySet());
-        for (final Map.Entry<String, List<RowItem>> entry : expectedExtractData.entrySet()) {
-            assertTrue(actualExtractData.containsKey(entry.getKey()));
-            final List<RowItem> expectedRows = entry.getValue();
-            final List<RowItem> actualRows = actualExtractData.get(entry.getKey());
-            assertNotNull(expectedRows);
-            assertNotNull(actualRows);
-            assertEquals(expectedRows.size(), actualRows.size());
-            for (int i = 0; i < expectedRows.size(); i++) {
-                assertRowItemDeepEquals(expectedRows.get(i), actualRows.get(i));
-            }
-        }
-    }
-
-    /**
-     * Asserts deep row items for equality.
-     *
-     * @param expected expected row item
-     * @param actual   actual row item
-     */
-    private static void assertRowItemDeepEquals(final RowItem expected, final RowItem actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-
-        final List<ColumnItem> expectedColumns = expected.getColumnItems();
-        final List<ColumnItem> actualColumns = actual.getColumnItems();
-        assertNotNull(expectedColumns);
-        assertNotNull(actualColumns);
-        assertEquals(expectedColumns.size(), actualColumns.size());
-        for (int i = 0; i < expectedColumns.size(); i++) {
-            assertColumnItemDeepEquals(expectedColumns.get(i), actualColumns.get(i));
-        }
-    }
-
-    /**
-     * Asserts deep column items for equality.
-     *
-     * @param expected expected column item
-     * @param actual   actual column item
-     */
-    private static void assertColumnItemDeepEquals(final ColumnItem expected, final ColumnItem actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertColumnDescriptionDeepEquals(expected.getColumnDescription(), actual.getColumnDescription());
-        assertEquals(expected.getValue(), actual.getValue());
-    }
-
-    /**
-     * Asserts deep column descriptions for equality.
-     *
-     * @param expected expected column description
-     * @param actual   actual column description
-     */
-    private static void assertColumnDescriptionDeepEquals(final ColumnDescription expected, final ColumnDescription actual) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getType(), actual.getType());
+        return columnItem;
     }
 
     /**
@@ -336,9 +274,9 @@ public class XmlExporterTest {
             for (int j = 0; j < 8; j++) {
                 final ColumnItem columnItem = getColumnItem(j, i + 1);
                 xml.append("<column name=\"");
-                xml.append(columnItem.getColumnDescription().getName());
+                xml.append(columnItem.getDescription().getName());
                 xml.append("\" type=\"");
-                xml.append(columnItem.getColumnDescription().getType());
+                xml.append(columnItem.getDescription().getType());
                 xml.append("\">");
                 xml.append(columnItem.getValue());
                 xml.append("</column>");

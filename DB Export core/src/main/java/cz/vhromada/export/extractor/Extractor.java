@@ -49,7 +49,7 @@ public abstract class Extractor {
      * @return extracted data
      * @throws ExportException if extracting data failed
      */
-    public ExtractData extract() throws ExportException {
+    public ExtractData extract() {
         final String databaseTableSQL = getDatabaseTableSQL();
         final String databaseColumnSQL = getDatabaseColumnSQL();
         try {
@@ -59,7 +59,11 @@ public abstract class Extractor {
                 final List<ColumnDescription> columns = getColumns(table, databaseColumnSQL);
                 extractedData.put(table, extractData(table, columns));
             }
-            return new ExtractData(extractedData);
+
+            final ExtractData extractData = new ExtractData();
+            extractData.setData(extractedData);
+
+            return extractData;
         } catch (final SQLException ex) {
             throw new ExportException("There was error in working with database.", ex);
         }
@@ -120,7 +124,9 @@ public abstract class Extractor {
             final List<ColumnDescription> result = new ArrayList<>();
             try (final ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    final ColumnDescription columnDescription = new ColumnDescription(resultSet.getString(1), convertColumn(resultSet.getString(2)));
+                    final ColumnDescription columnDescription = new ColumnDescription();
+                    columnDescription.setName(resultSet.getString(1));
+                    columnDescription.setType(convertColumn(resultSet.getString(2)));
                     result.add(columnDescription);
                 }
             }
@@ -168,9 +174,14 @@ public abstract class Extractor {
                                 value = resultSet.getObject(column.getName());
                                 break;
                         }
-                        columns.add(new ColumnItem(column, value));
+                        final ColumnItem columnItem = new ColumnItem();
+                        columnItem.setDescription(column);
+                        columnItem.setValue(value);
+                        columns.add(columnItem);
                     }
-                    result.add(new RowItem(columns));
+                    final RowItem rowItem = new RowItem();
+                    rowItem.setColumns(columns);
+                    result.add(rowItem);
                 }
             }
             return result;

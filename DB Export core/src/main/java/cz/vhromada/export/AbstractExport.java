@@ -21,8 +21,12 @@ import cz.vhromada.validators.Validators;
  */
 public abstract class AbstractExport implements Export {
 
+    /**
+     * @throws IllegalArgumentException if database description is null
+     * @throws ExportException          if getting connection failed
+     */
     @Override
-    public Connection getConnection(final Database database) throws ExportException {
+    public Connection getConnection(final Database database) {
         Validators.validateArgumentNotNull(database, "Database description");
 
         try {
@@ -32,8 +36,13 @@ public abstract class AbstractExport implements Export {
         }
     }
 
+    /**
+     * @throws IllegalArgumentException if database description is null
+     *                                  or connection is null
+     * @throws ExportException          if getting connection failed
+     */
     @Override
-    public ExtractData extract(final Database database, final Connection connection) throws ExportException {
+    public ExtractData extract(final Database database, final Connection connection) {
         Validators.validateArgumentNotNull(database, "Database description");
         Validators.validateArgumentNotNull(connection, "Connection");
 
@@ -52,8 +61,13 @@ public abstract class AbstractExport implements Export {
         return extractor.extract();
     }
 
+    /**
+     * @throws IllegalArgumentException if extracted data from database is null
+     *                                  or charset is null
+     * @throws ExportException          if getting connection failed
+     */
     @Override
-    public void export(final ExtractData extractData, final Charset charset) throws ExportException {
+    public void export(final ExtractData extractData, final Charset charset) {
         Validators.validateArgumentNotNull(extractData, "Extract data from database");
         Validators.validateArgumentNotNull(charset, "Charset");
 
@@ -67,6 +81,6 @@ public abstract class AbstractExport implements Export {
      * @param charset     charset
      * @throws ExportException if exporting data failed
      */
-    protected abstract void exportData(final ExtractData extractData, final Charset charset) throws ExportException;
+    protected abstract void exportData(final ExtractData extractData, final Charset charset);
 
 }

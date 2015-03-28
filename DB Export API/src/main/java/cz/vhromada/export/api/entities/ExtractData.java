@@ -18,22 +18,6 @@ public class ExtractData {
     private Map<String, List<RowItem>> data;
 
     /**
-     * Creates a new instance of ExtractData.
-     */
-    public ExtractData() {
-    }
-
-    /**
-     * Creates a new instance of ExtractData.
-     *
-     * @param data extracted data
-     * @throws IllegalArgumentException of extracted data is null
-     */
-    public ExtractData(final Map<String, List<RowItem>> data) {
-        this.data = data;
-    }
-
-    /**
      * Returns extracted data.
      * <p/>
      * Map: table name -> list of row items
@@ -47,7 +31,7 @@ public class ExtractData {
     /**
      * Sets a new value to extracted data.
      *
-     * @param data extracted data
+     * @param data new value
      */
     public void setData(final Map<String, List<RowItem>> data) {
         this.data = data;

@@ -4,52 +4,52 @@
             targetNamespace="http://vhromada.cz/export"
             elementFormDefault="qualified">
 
-	<xsd:element name="export" type="exportType"/>
+    <xsd:element name="export" type="exportType"/>
 
-	<xsd:complexType name="exportType">
-		<xsd:sequence>
-			<xsd:element name="table" type="tableType" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
+    <xsd:complexType name="exportType">
+        <xsd:sequence>
+            <xsd:element name="table" type="tableType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
 
-	<xsd:complexType name="tableType">
-		<xsd:sequence>
-			<xsd:element name="row" type="rowType" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-		<xsd:attribute name="name" type="nonEmptyStringType" use="required"/>
-	</xsd:complexType>
+    <xsd:complexType name="tableType">
+        <xsd:sequence>
+            <xsd:element name="row" type="rowType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="nonEmptyStringType" use="required"/>
+    </xsd:complexType>
 
-	<xsd:complexType name="rowType">
-		<xsd:sequence>
-			<xsd:element name="column" type="columnType" minOccurs="1" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
+    <xsd:complexType name="rowType">
+        <xsd:sequence>
+            <xsd:element name="column" type="columnType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
 
-	<xsd:complexType name="columnType">
-		<xsd:complexContent>
-			<xsd:restriction base="xsd:string">
-				<xsd:attribute name="name" type="nonEmptyStringType" use="required"/>
-				<xsd:attribute name="type" type="columnDefinitionType" use="required"/>
-			</xsd:restriction>
-		</xsd:complexContent>
-	</xsd:complexType>
+    <xsd:complexType name="columnType">
+        <xsd:complexContent>
+            <xsd:restriction base="xsd:string">
+                <xsd:attribute name="name" type="nonEmptyStringType" use="required"/>
+                <xsd:attribute name="type" type="columnDefinitionType" use="required"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
 
-	<xsd:simpleType name="nonEmptyStringType">
-		<xsd:restriction base="xsd:string">
-			<xsd:minLength value="1"/>
-		</xsd:restriction>
-	</xsd:simpleType>
+    <xsd:simpleType name="nonEmptyStringType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
-	<xsd:simpleType name="columnDefinitionType">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="BOOLEAN"/>
-			<xsd:enumeration value="DECIMAL"/>
-			<xsd:enumeration value="STRING"/>
-			<xsd:enumeration value="DATE"/>
-			<xsd:enumeration value="TIME"/>
-			<xsd:enumeration value="TIMESTAMP"/>
-			<xsd:enumeration value="OBJECT"/>
-		</xsd:restriction>
-	</xsd:simpleType>
+    <xsd:simpleType name="columnDefinitionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BOOLEAN"/>
+            <xsd:enumeration value="DECIMAL"/>
+            <xsd:enumeration value="STRING"/>
+            <xsd:enumeration value="DATE"/>
+            <xsd:enumeration value="TIME"/>
+            <xsd:enumeration value="TIMESTAMP"/>
+            <xsd:enumeration value="OBJECT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
 </xsd:schema>
