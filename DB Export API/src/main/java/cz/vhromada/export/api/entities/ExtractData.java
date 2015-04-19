@@ -12,15 +12,11 @@ public class ExtractData {
 
     /**
      * Extracted data.
-     * <p/>
-     * Map: table name -> list of row items
      */
     private Map<String, List<RowItem>> data;
 
     /**
      * Returns extracted data.
-     * <p/>
-     * Map: table name -> list of row items
      *
      * @return extracted data
      */

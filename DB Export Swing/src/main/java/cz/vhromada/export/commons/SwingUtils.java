@@ -62,7 +62,7 @@ public final class SwingUtils {
      *
      * @param layout     layout
      * @param comboBox   combo box
-     * @param components components (Map: label -> data)
+     * @param components components (Map: label - data)
      * @param buttons    buttons
      * @throws IllegalArgumentException if layout is null
      *                                  or combo box is null
@@ -98,7 +98,7 @@ public final class SwingUtils {
      *
      * @param layout     layout
      * @param comboBox   combo box
-     * @param components components (Map: label -> data)
+     * @param components components (Map: label - data)
      * @param buttons    buttons
      * @throws IllegalArgumentException if layout is null
      *                                  or combo box is null
@@ -145,7 +145,7 @@ public final class SwingUtils {
      * Creates horizontal layout for components.
      *
      * @param layout     layout
-     * @param components components (Map: label -> data)
+     * @param components components (Map: label - data)
      * @throws IllegalArgumentException if layout is null
      *                                  or components are null
      *                                  or components contain null key
@@ -208,7 +208,7 @@ public final class SwingUtils {
      *
      * @param layout     layout
      * @param group      layout group
-     * @param components components (Map: label -> data)
+     * @param components components (Map: label - data)
      */
     private static void createVerticalComponentsLayout(final GroupLayout layout, final GroupLayout.Group group, final Map<JLabel, JTextField> components) {
         for (final Map.Entry<JLabel, JTextField> data : components.entrySet()) {
