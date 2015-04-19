@@ -3,7 +3,7 @@ package cz.vhromada.export.gui.data;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
 import cz.vhromada.validators.Validators;
 
@@ -18,14 +18,6 @@ public final class Pictures {
      * Pictures (Map: Name -> Picture)
      */
     private static final Map<String, ImageIcon> PICTURES;
-
-    static {
-        PICTURES = new HashMap<>();
-        PICTURES.put("back", new ImageIcon("pics/back.jpg"));
-        PICTURES.put("continue", new ImageIcon("pics/continue.jpg"));
-        PICTURES.put("exit", new ImageIcon("pics/exit.jpg"));
-        PICTURES.put("export", new ImageIcon("pics/export.jpg"));
-    }
 
     /**
      * Creates a new instance of Pictures.
@@ -44,6 +36,14 @@ public final class Pictures {
         Validators.validateArgumentNotNull(name, "Picture's name");
 
         return PICTURES.get(name);
+    }
+
+    static {
+        PICTURES = new HashMap<>();
+        PICTURES.put("back", new ImageIcon("pics/back.jpg"));
+        PICTURES.put("continue", new ImageIcon("pics/continue.jpg"));
+        PICTURES.put("exit", new ImageIcon("pics/exit.jpg"));
+        PICTURES.put("export", new ImageIcon("pics/export.jpg"));
     }
 
 }

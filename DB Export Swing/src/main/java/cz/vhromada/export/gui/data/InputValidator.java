@@ -1,6 +1,6 @@
 package cz.vhromada.export.gui.data;
 
-import javax.swing.*;
+import javax.swing.JButton;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 

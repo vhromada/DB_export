@@ -1,6 +1,6 @@
 package cz.vhromada.export.gui;
 
-import java.awt.*;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.charset.Charset;
@@ -9,7 +9,13 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentListener;
 
 import cz.vhromada.export.api.Export;
