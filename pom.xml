@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>cz.vhromada.validators</groupId>
                 <artifactId>validators</artifactId>
-                <version>1.2.0</version>
+                <version>1.2.1</version>
             </dependency>
             <!--Joda time-->
             <dependency>
@@ -103,7 +103,7 @@
             <dependency>
                 <groupId>cz.vhromada.test</groupId>
                 <artifactId>deep-assert</artifactId>
-                <version>1.2.0</version>
+                <version>1.2.1</version>
                 <scope>test</scope>
             </dependency>
             <!--JUnit-->
