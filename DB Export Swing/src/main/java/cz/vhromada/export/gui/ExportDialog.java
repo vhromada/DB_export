@@ -1,6 +1,5 @@
 package cz.vhromada.export.gui;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.nio.charset.Charset;
 import java.sql.Connection;
@@ -61,15 +60,10 @@ public class ExportDialog extends JDialog {
 
         final JProgressBar progressBar = new JProgressBar(0, 3);
         progressBar.setStringPainted(true);
-        final PropertyChangeListener progressListener = new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                if ("progress".equals(evt.getPropertyName())) {
-                    progressBar.setValue((Integer) evt.getNewValue());
-                }
+        final PropertyChangeListener progressListener = evt -> {
+            if ("progress".equals(evt.getPropertyName())) {
+                progressBar.setValue((Integer) evt.getNewValue());
             }
-
         };
 
         final GroupLayout layout = new GroupLayout(getContentPane());

@@ -1,8 +1,6 @@
 package cz.vhromada.export.gui;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -117,14 +115,7 @@ public class ExportChoose extends JFrame {
         setIconImage(Pictures.getPicture("export").getImage());
 
         exportType.setSelectedItem(null);
-        exportType.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                exportTypeAction();
-            }
-
-        });
+        exportType.addActionListener(e -> exportTypeAction());
 
         directoryLabel.setLabelFor(directoryData);
         directoryLabel.setFocusable(false);
@@ -145,32 +136,11 @@ public class ExportChoose extends JFrame {
         };
         SwingUtils.addInputValidator(inputValidator, directoryData, fileData);
 
-        backButton.addActionListener(new ActionListener() {
+        backButton.addActionListener(e -> backAction());
 
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                backAction();
-            }
+        exportButton.addActionListener(e -> exportAction());
 
-        });
-
-        exportButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                exportAction();
-            }
-
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                System.exit(0);
-            }
-
-        });
+        exitButton.addActionListener(e -> System.exit(0));
 
         final GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,16 +162,10 @@ public class ExportChoose extends JFrame {
      * Performs action for button Back.
      */
     private void backAction() {
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                setVisible(false);
-                new DbChoose(charset).setVisible(true);
-            }
-
+        EventQueue.invokeLater(() -> {
+            setVisible(false);
+            new DbChoose(charset).setVisible(true);
         });
-
     }
 
     /**
@@ -211,14 +175,7 @@ public class ExportChoose extends JFrame {
         logger.info("Type: {}", exportType.getSelectedItem());
         logger.info("Directory: {}", directoryData.getText());
         logger.info("File: {}", fileData.getText());
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new ExportDialog(getExport(), database, charset).setVisible(true);
-            }
-
-        });
+        EventQueue.invokeLater(() -> new ExportDialog(getExport(), database, charset).setVisible(true));
     }
 
     /**

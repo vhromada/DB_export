@@ -1,8 +1,6 @@
 package cz.vhromada.export.gui;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -119,14 +117,7 @@ public class DbChoose extends JFrame {
         setResizable(false);
 
         databases.setSelectedItem(null);
-        databases.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                databasesAction();
-            }
-
-        });
+        databases.addActionListener(e -> databasesAction());
 
         SwingUtils.initLabelComponent(urlLabel, urlData);
         SwingUtils.initLabelComponent(usernameLabel, usernameData);
@@ -143,23 +134,9 @@ public class DbChoose extends JFrame {
         SwingUtils.addInputValidator(inputValidator, urlData, usernameData, passwordData);
 
         continueButton.setEnabled(false);
-        continueButton.addActionListener(new ActionListener() {
+        continueButton.addActionListener(e -> continueAction());
 
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                continueAction();
-            }
-
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                System.exit(0);
-            }
-
-        });
+        exitButton.addActionListener(e -> System.exit(0));
 
         final GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,20 +159,14 @@ public class DbChoose extends JFrame {
      * Performs action for button Continue.
      */
     private void continueAction() {
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                logger.info("Database: {}", databases.getSelectedItem());
-                logger.info("URL: {}", urlData.getText());
-                logger.info("Username: {}", usernameData.getText());
-                logger.info("Password: {}", passwordData.getText());
-                setVisible(false);
-                new ExportChoose(getDatabase(), charset).setVisible(true);
-            }
-
+        EventQueue.invokeLater(() -> {
+            logger.info("Database: {}", databases.getSelectedItem());
+            logger.info("URL: {}", urlData.getText());
+            logger.info("Username: {}", usernameData.getText());
+            logger.info("Password: {}", passwordData.getText());
+            setVisible(false);
+            new ExportChoose(getDatabase(), charset).setVisible(true);
         });
-
     }
 
     /**
