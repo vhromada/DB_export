@@ -19,6 +19,16 @@ import cz.vhromada.validators.Validators;
 public final class SwingUtils {
 
     /**
+     * Name of field layout
+     */
+    private static final String FIELD_LAYOUT = "Layout";
+
+    /**
+     * Name of field combo box
+     */
+    private static final String FIELD_COMBO_BOX = "Combo box";
+
+    /**
      * Name of field components
      */
     private static final String FIELD_COMPONENTS = "Components";
@@ -64,6 +74,7 @@ public final class SwingUtils {
      * @param comboBox   combo box
      * @param components components (Map: label - data)
      * @param buttons    buttons
+     * @return horizontal layout for components
      * @throws IllegalArgumentException if layout is null
      *                                  or combo box is null
      *                                  or components are null
@@ -74,8 +85,8 @@ public final class SwingUtils {
      */
     public static GroupLayout.Group createHorizontalLayout(final GroupLayout layout, final JComboBox<?> comboBox, final Map<JLabel, JTextField> components,
             final JButton... buttons) {
-        Validators.validateArgumentNotNull(layout, "Layout");
-        Validators.validateArgumentNotNull(comboBox, "Combo box");
+        Validators.validateArgumentNotNull(layout, FIELD_LAYOUT);
+        Validators.validateArgumentNotNull(comboBox, FIELD_COMBO_BOX);
         Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
         Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
         Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
@@ -100,6 +111,7 @@ public final class SwingUtils {
      * @param comboBox   combo box
      * @param components components (Map: label - data)
      * @param buttons    buttons
+     * @return vertical layout for components
      * @throws IllegalArgumentException if layout is null
      *                                  or combo box is null
      *                                  or components are null
@@ -110,8 +122,8 @@ public final class SwingUtils {
      */
     public static GroupLayout.Group createVerticalLayout(final GroupLayout layout, final JComboBox<?> comboBox, final Map<JLabel, JTextField> components,
             final JButton... buttons) {
-        Validators.validateArgumentNotNull(layout, "Layout");
-        Validators.validateArgumentNotNull(comboBox, "Combo box");
+        Validators.validateArgumentNotNull(layout, FIELD_LAYOUT);
+        Validators.validateArgumentNotNull(comboBox, FIELD_COMBO_BOX);
         Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
         Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
         Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
@@ -154,7 +166,7 @@ public final class SwingUtils {
      *                                  or components contain null value
      */
     private static GroupLayout.Group createHorizontalComponentsLayout(final GroupLayout layout, final Map<JLabel, JTextField> components) {
-        Validators.validateArgumentNotNull(layout, "Layout");
+        Validators.validateArgumentNotNull(layout, FIELD_LAYOUT);
         Validators.validateArgumentNotNull(components, FIELD_COMPONENTS);
         Validators.validateMapNotContainNull(components, FIELD_COMPONENTS);
 
@@ -191,7 +203,7 @@ public final class SwingUtils {
      *                                  or buttons contain null
      */
     private static GroupLayout.Group createHorizontalButtonsLayout(final GroupLayout layout, final JButton... buttons) {
-        Validators.validateArgumentNotNull(layout, "Layout");
+        Validators.validateArgumentNotNull(layout, FIELD_LAYOUT);
         Validators.validateArgumentNotNull(buttons, FIELD_BUTTONS);
         Validators.validateArrayNotContainNull(buttons, FIELD_BUTTONS);
 

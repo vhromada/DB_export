@@ -26,6 +26,7 @@ public interface Export {
     /**
      * Extract data from database.
      *
+     * @param database database description
      * @param connection connection
      * @return extracted data
      * @throws IllegalArgumentException                          if database description is null
