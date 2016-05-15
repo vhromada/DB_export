@@ -90,6 +90,7 @@ public class XmlExporter extends AbstractExport {
         for (final Map.Entry<String, List<RowItem>> entry : extractData.getData().entrySet()) {
             root.appendChild(createTableElement(entry.getKey(), entry.getValue()));
         }
+
         return new Document(root);
     }
 
@@ -106,6 +107,7 @@ public class XmlExporter extends AbstractExport {
         for (final RowItem rowItem : rowItems) {
             tableElement.appendChild(createRowElement(rowItem));
         }
+
         return tableElement;
     }
 
@@ -120,6 +122,7 @@ public class XmlExporter extends AbstractExport {
         for (final ColumnItem columnItem : rowItem.getColumns()) {
             rowElement.appendChild(createColumnElement(columnItem));
         }
+
         return rowElement;
     }
 
@@ -134,6 +137,7 @@ public class XmlExporter extends AbstractExport {
         columnElement.addAttribute(new Attribute("name", columnItem.getDescription().getName()));
         columnElement.addAttribute(new Attribute("type", columnItem.getDescription().getType().name()));
         columnElement.appendChild(columnItem.getValue() == null ? null : columnItem.getValue().toString());
+
         return columnElement;
     }
 

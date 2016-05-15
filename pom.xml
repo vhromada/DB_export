@@ -4,9 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>cz.vhromada.maven</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <groupId>cz.vhromada.export</groupId>
     <artifactId>db-export-parent</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <packaging>pom</packaging>
 
     <name>DB Export</name>
@@ -36,12 +42,7 @@
     </scm>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <project.source.version>7</project.source.version>
-        <org.slf4j.version>1.7.12</org.slf4j.version>
-        <org.springframework.version>4.1.6.RELEASE</org.springframework.version>
-        <org.apache.derby.version>10.10.2.0</org.apache.derby.version>
+        <org.apache.derby.version>10.12.1.1</org.apache.derby.version>
     </properties>
 
     <modules>
@@ -50,6 +51,7 @@
         <module>DB SQL Export</module>
         <module>DB XML Export</module>
         <module>DB Export Swing</module>
+        <module>DB Export test</module>
     </modules>
 
     <dependencyManagement>
@@ -58,97 +60,47 @@
             <dependency>
                 <groupId>cz.vhromada.validators</groupId>
                 <artifactId>validators</artifactId>
-                <version>1.2.1</version>
+                <version>1.3.0</version>
             </dependency>
             <!--Joda time-->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.7</version>
+                <version>2.9.3</version>
             </dependency>
             <!--XOM-->
             <dependency>
                 <groupId>xom</groupId>
                 <artifactId>xom</artifactId>
                 <version>1.2.5</version>
-            </dependency>
-            <!--SLF4J-->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <version>${org.slf4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jul-to-slf4j</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>log4j-over-slf4j</artifactId>
-                <version>${org.slf4j.version}</version>
-            </dependency>
-            <!--Logback-->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.1.3</version>
-            </dependency>
-            <!--Deep asserts-->
-            <dependency>
-                <groupId>cz.vhromada.test</groupId>
-                <artifactId>deep-assert</artifactId>
-                <version>1.2.1</version>
-                <scope>test</scope>
-            </dependency>
-            <!--JUnit-->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <!--Mockito-->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <scope>test</scope>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.3.03</version>
             </dependency>
             <!--Spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
-                <version>${org.springframework.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${org.springframework.version}</version>
-                <scope>test</scope>
+                <version>${spring.version}</version>
             </dependency>
             <!--Databases-->
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>1.3.171</version>
+                <version>1.3.176</version>
             </dependency>
             <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
-                <version>2.3.2</version>
+                <version>2.3.3</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.derby</groupId>
@@ -163,99 +115,9 @@
         </dependencies>
     </dependencyManagement>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <activation>
-                <property>
-                    <name>release</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.4</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                </manifest>
-                                <manifestEntries>
-                                    <Built-By>Vladimir Hromada</Built-By>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.2</version>
-                        <configuration>
-                            <docfilessubdirs>true</docfilessubdirs>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <docencoding>${project.reporting.outputEncoding}</docencoding>
-                            <archive>
-                                <manifest>
-                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                </manifest>
-                                <manifestEntries>
-                                    <Built-By>Vladimir Hromada</Built-By>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>jar</goal>
-                                    <goal>javadoc</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.5</version>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -272,27 +134,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${project.source.version}</source>
-                    <target>${project.source.version}</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Built-By>Vladimir Hromada</Built-By>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
             </plugin>
         </plugins>
     </build>

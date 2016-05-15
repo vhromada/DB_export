@@ -123,6 +123,7 @@ public final class SwingUtils {
                 .addGap(SwingConstants.VERTICAL_GAP_SIZE);
         createVerticalComponentsLayout(layout, result, components);
         result.addGroup(createVerticalButtonsLayout(layout, buttons)).addGap(SwingConstants.VERTICAL_GAP_SIZE);
+
         return result;
     }
 
@@ -138,6 +139,7 @@ public final class SwingUtils {
         for (final JButton button : buttons) {
             group.addComponent(button, SwingConstants.VERTICAL_BUTTON_SIZE, SwingConstants.VERTICAL_BUTTON_SIZE, SwingConstants.VERTICAL_BUTTON_SIZE);
         }
+
         return group;
     }
 
@@ -160,6 +162,7 @@ public final class SwingUtils {
         for (final Map.Entry<JLabel, JTextField> data : components.entrySet()) {
             group.addGroup(createHorizontalDataComponentsLayout(layout, data.getKey(), data.getValue()));
         }
+
         return group;
     }
 
@@ -200,6 +203,7 @@ public final class SwingUtils {
                     .addComponent(button, SwingConstants.HORIZONTAL_BUTTON_SIZE, SwingConstants.HORIZONTAL_BUTTON_SIZE, SwingConstants.HORIZONTAL_BUTTON_SIZE);
         }
         group.addGap(gapSize).addGap(SwingConstants.HORIZONTAL_SHORT_GAP_SIZE);
+
         return group;
     }
 

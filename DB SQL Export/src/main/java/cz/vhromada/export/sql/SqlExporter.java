@@ -118,6 +118,7 @@ public class SqlExporter extends AbstractExport {
             }
         }
         sql.append(");");
+
         return sql.toString();
     }
 
