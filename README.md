@@ -5,3 +5,5 @@ Supported databases:
 * Derby
 * HSQLDB
 * H2
+
+DEPRECATED
